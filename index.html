@@ -129,11 +129,13 @@ body {
     var finaldata = "";
     var final = "";
     for (var i = 0; i < event.results.length; ++i) {
+	//commands for software
 	switch( event.results[i].transcript)
 	{
 	case '':
 	break;
 	default:
+	//add text to data
 	 final += event.results[i].transcript;
 	break;
 	}
