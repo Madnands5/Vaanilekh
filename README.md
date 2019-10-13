@@ -1,2 +1,3 @@
 # Vaanilekh
-softwaer for disabled students to complete exams 
+software for disabled students to complete exams
+
