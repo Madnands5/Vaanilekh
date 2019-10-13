@@ -2,6 +2,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+  </script>
 <style>
 body {
   font-family: "Lato", sans-serif;
@@ -114,24 +119,28 @@ body {
 </div>
 <script type="text/javascript">
   var recognizing;
-  var recognition = new SpeechRecognition();
+  var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
-  recognition.interimResults = true;
+  recognition.interimResults = false;
   reset();
   recognition.onend = reset;
 
   recognition.onresult = function (event) {
+    var finaldata = "";
     var final = "";
-    var interim = "";
     for (var i = 0; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final += event.results[i][0].transcript;
-      } else {
-        interim += event.results[i][0].transcript;
-      }
-    }
-    final_span.innerHTML = final;
-    interim_span.innerHTML = interim;
+	switch( event.results[i].transcript)
+	{
+	case '':
+	break;
+	default:
+	 final += event.results[i].transcript;
+	break;
+	}
+ 
+}
+
+	$("#final").append(finaldata);
   }
 
   function reset() {
@@ -143,12 +152,12 @@ body {
     if (recognizing) {
       recognition.stop();
       reset();
-    } else {
+    } 
+	else {
       recognition.start();
       recognizing = true;
-      button.innerHTML = "Click to Stop";
-      final_span.innerHTML = "";
-      interim_span.innerHTML = "";
+
+
     }
   }
 
@@ -162,6 +171,18 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("mySidenav2").style.width = "0";
 }
+$('body').keyup(function(e){
+   if(e.keyCode == 8){
+       // user has pressed backspace
+	  $(e).trigger({type: 'keypress', which: 32, keyCode: 8});
+		console.log("<==");
+		
+   }
+   if(e.keyCode == 32){
+       // user has pressed space
+       console.log("==>");
+   }
+});
 </script>
    
 </body>
