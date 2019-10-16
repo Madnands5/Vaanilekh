@@ -96,22 +96,31 @@ body {
 .margin{
 	border-right:solid;
 	width:10%;
-	height:100%;
+vertical-align: top;
 	}
 .margin2{
 
-	width:5%;
-	height:100%;
+	width:0%;
+
 	}
 .blank{
 	
-	width:85%;
-	height:100%;
+	width:90%;
+
 	}
 table{
 	margin:0px;
-	height:100%;
+	margin-top:50px;
+	margin:bottom:50px;
 	width:100%;
+	}
+	tr
+	{
+	height:25px;
+	}
+	td
+	{
+	height:30px;
 	}
 .page{
 	border:solid ;
@@ -129,45 +138,27 @@ textarea{
 </head>
 <body>
 <center>
-	<div class="page" id="1">
+
+	<input type="text" id="command">
+	enter here;
+	<input type="button" id="submit">
+	<div class="container" style="height:auto">
+	<div class="page" id="1" >
 		<table>
 
 		<tr>
-		
+		<td class="margin" id="Q1" >
+				Q1:]
+			<td class="blank" id="ans1">
 			
-		</tr>
-	</table>
-	</div>
-	<div class="page" id="2" >
-	<table>
-
-		<tr>
-			<td class="margin">
-				<textarea  style="width:100%;height:100%;"></textarea>
-			</td>
-			<td class="blank">
-				<textarea id="1"  style="width:100%;height:100%;"></textarea>
 			</td>
 			<td class="margin2">
 			</td>
-			
 		</tr>
 	</table>
 	</div>
-	<div class="page" id="3">
-	<table>
+	</div>
 
-		<tr>
-			<td class="margin">
-				<textarea  style="width:100%;height:100%;"></textarea>
-			</td>
-			<td class="blank">
-			<textarea  id="2" style="width:100%;height:100%;"></textarea>
-			</td>
-			
-		</tr>
-	</table>
-	</div>
 	<button id="print">
 		PRINT
 		</button>	
@@ -179,10 +170,427 @@ textarea{
 <button id="button" onclick="toggleStartStop()"></button>
 </center>
 
-</div>
+
+
 <script type="text/javascript">
   var recognizing;
-  var recognition = new webkitSpeechRecognition();
+  var commandcall=0;
+  var mode="Profile";
+  var submode="name";
+  var lineno=0;
+  var total_line=0;
+  var linedata="";
+  var currerntline=0;
+  var icount=0;
+  var strx="";
+  var current_element="#ans1";
+  $("#submit").click(function(){
+
+		console.clear();
+	    var str = $("#command").val()+" ";
+	
+	console.log("commandcall "+commandcall+" mode:"+ mode+" submode:");
+  var array  = str.split(" ");
+if(array[1]!=undefined)
+{
+	  for(var i=0;i < array.length; i++)
+	  {
+		switch(array[i])
+		{
+		case "VL":
+		case "BL":
+		case "Vl":
+		case "Bl":
+		case "vl":
+		case "bl":
+		commandcall=1;
+		console.log(commandcall);
+		break;
+		case "Profile":
+		case "profile":
+			if(commandcall==1)
+			{
+				mode="Profile";
+				console.log("mode"+mode);
+			
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Name":
+		case "name":
+		if((commandcall==1)&&(mode=="Profile"))
+			{
+					console.log("Your name is ");
+					for(var j=i;j<array.length;j++)
+					{
+					console.log(array[j]);
+					}
+					return false;
+			
+			}
+
+				break;
+		case "roll":
+		case "Roll":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="Roll";
+				console.log("Your roll no is "+array[i+2]);
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+		case "seat":
+		case "Seat":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="Seat";
+				console.log("Your Seat no is "+array[i+2]);
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+		case "center":
+		case "center":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="center";
+				console.log("Your center no is "+array[i+2]);
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+		break;
+				
+		case "university":
+		case "University":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="University";
+				console.log("Your University name is ");
+				for(var j=i;j<array.length;j++)
+				{
+				console.log(array[j]);
+				}
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+		case "State":
+		case "State":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="State";
+				console.log("Your state is ");
+				for(var j=i;j<array.length;j++)
+				{
+				console.log(array[j]);
+				}
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+		case "City":
+		case "city":
+		case "CT":
+		case "ct":
+		case "Ct":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="City";
+				console.log("Your city is ");
+				for(var j=i;j<array.length;j++)
+				{
+				console.log(array[j]);
+				}
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+			
+		case "board":
+		case "Board":
+		case "boored":
+		case "bored":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="Board";
+				console.log("Your Board is ");
+				for(var j=i;j<array.length;j++)
+				{
+				console.log(array[j]);
+				}
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+			break;
+		case "save":
+			if((commandcall==1)&&(mode=="Profile"))
+			{
+				submode="save";
+				console.log("Your Board is ");
+				for(var j=i;j<array.length;j++)
+				{
+				console.log(array[j]);
+				}
+				return false;
+			}
+			else
+			{
+			console.log(array[i]);
+			}
+		break;
+		case "Editor":
+		case "editor":
+			if(commandcall==1)
+			{
+				mode="Editor";
+				console.log("mode"+mode);
+				
+				
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Next":
+		case "next":
+			if((commandcall==1)&&(mode=="Editor"))
+			{	submode="Next";
+				if((array[i+1]=="Line")||(array[i+1]=="line"))
+				{
+				console.log("<br></td><td class='margin'><td/><td class='blank'>");
+				return false;
+				}
+				else if((array[i+1]=="Question")||(array[i+1]=="question"))
+				{
+					console.log("<br></td ><td class='margin'>");
+						return false;
+				}
+				else if((array[i+1]=="Paragraph")||(array[i+1]=="paragraph"))
+				{
+					console.log("<br><br>&nbsp");
+						return false;
+				}
+				else if((array[i+1]=="Page")||(array[i+1]=="page"))
+				{
+				$(".container").append("<div class='page' id='1'><table><tr><td class='margin' id='Q1' > Q1:]<td class='blank' id='ans1'>");
+					return false;
+				}
+				
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Navigate":
+		case "navigate":
+			if(commandcall==1)
+			{
+				mode="Navigate";
+				console.log("mode"+mode);
+				
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "up":
+		case "Up":console.log("Up");
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Up";
+				console.log("MOve curosr ^ ");
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Down":
+		case "down":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Down";
+				console.log("MOve curosr V ");
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Left":
+		case "left":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Left";
+				console.log("MOve curosr <- ");
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Right":
+		case "right":
+		case "Write":
+		case "write":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Right";
+				console.log("MOve curosr -> ");
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Delete":
+		case "delete":
+			if((commandcall==1)&&(mode=="Editor"))
+			{	submode="Delete";
+				
+				if((array[i+1]=="Line")||(array[i+1]=="line"))
+				{
+					console.log("delete 1 line");
+					return false;
+				}
+				else if((array[i+1]=="Paragraph")||(array[i+1]=="paragraph"))
+				{
+					console.log("delete paragraph");
+					return false;
+				}
+				else if((array[i+1]=="Start")||(array[i+1]=="start"))
+				{
+					console.log("keep deleting till stop is said");
+					submode="Delete";
+					return false;
+				}
+				else
+				{
+				console.log("delete 1 charecter");
+				}
+				
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Stop":
+		case "stop":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	if(submode="Delete")
+				{
+				console.log("Stop deleting");
+				submode="";
+				return false;
+				}	
+			}	
+			else
+			{
+				console.log(array[i]);
+			}
+		case "Space":
+		case "space":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Space";
+				console.log("add space here");
+				return false;
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "Tab":
+		case "tab":
+			if((commandcall==1)&&(mode=="Navigate"))
+			{	submode="Tab";
+				console.log("add tabspace here ");
+				return false;
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		
+		case "Commands":
+		case "Commands":
+			if(commandcall==1)
+			{
+				mode="Commands";
+				console.log("mode"+mode);
+				console.log("show all Commands");
+				
+			}
+			else
+			{
+				console.log(array[i]);
+			}
+			break;
+		case "exit":
+		case "Exit":
+		if(commandcall==1)
+			{
+			
+			mode="";
+			submode="";
+			console.log("Exit mode");
+			commandcall=0;return false;
+			break;
+			}
+		else
+		{
+		console.log(array[i]); 
+		}
+		break;
+		default :
+		
+		strx = strx+" "+array[i];
+		if(strx.length>80)
+		{
+			$(current_element).append("<br>");
+			$(current_element).append(array[i]);
+			console.log(strx.length);
+			strx="";
+		
+		
+		}
+		else
+		{
+		$("#ans1").append(" "+array[i]);
+		}
+		break ;
+		}	
+	  }
+ } 
+});
+	
+  /*var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
   reset();
@@ -194,7 +602,18 @@ textarea{
 	//commands for software
 	switch( event.results[i].transcript)
 	{
-	case '':
+	case 'Vl':
+	case 'VL':
+	case 'VL':
+		commandcall=1;
+	break;
+	case 'Profile' :
+	if (commandcall==1)
+	{
+		mode="Profile";
+	
+	}
+	else
 	break;
 	default:
 	//add text to data
@@ -220,21 +639,8 @@ textarea{
       recognizing = true;
     }
   }
+*/
 
-$('body').keyup(function(e){
-	var s=$("#1").Selection()
-   if(e.keyCode == 8){
-       // user has pressed backspace
-	  $(e).trigger({type: 'keypress', which: 32, keyCode: 8});
-		console.log("<==");
-		
-   }
-   if(e.keyCode == 32){
-       // user has pressed space
-       console.log("==>");
-   }
-  
-});
 $(document).ready(function(){
 /*  $("textarea").keypress(function(e){
  var c = $("textarea").val()+(String.fromCharCode(e.which))
