@@ -100,12 +100,12 @@ vertical-align: top;
 	}
 .margin2{
 
-	width:0%;
+	width:2%;
 
 	}
-.blank{
+.para{
 	
-	width:90%;
+	width:88%;
 
 	}
 table{
@@ -126,7 +126,8 @@ table{
 	border:solid ;
 	box-shadow:5px 5px black;
 	width:60%;
-	height:1100px;
+	height:1050px;
+	margin-top:50px;
 	}
 textarea{
 	decoration:none;
@@ -142,23 +143,27 @@ textarea{
 	<input type="text" id="command">
 	enter here;
 	<input type="button" id="submit">
+	
+	
 	<div class="container" style="height:auto">
-	<div class="page" id="1" >
-		<table>
+		<div class="page" id="1" >
+			<table class="1">
 
-		<tr>
-		<td class="margin" id="Q1" >
-				Q1:]
-			<td class="blank" >
-				<DIV class="ans1">
-				
-				</DIV>
-			</td>
-			<td class="margin2">
-			</td>
-		</tr>
-	</table>
-	</div>
+				<tr>
+					<td class="margin" id="Q1">
+						Q1:]
+					</td>
+					
+					<td class="para" id="P1">
+						
+					</td>
+					<td class="margin2">
+					</td>
+					
+				</tr>
+			
+			</table>
+		</div>
 	</div>
 
 	<button id="print">
@@ -175,18 +180,33 @@ textarea{
 
 
 <script type="text/javascript">
+  var pageheigth="970";
+  
+    
   var recognizing;
   var totalinpage=0;
   var commandcall=0;
   var mode="";
   var submode="name";
   var currentline=0;
-  var currentparagraph=0;
+  var currentparagraph=1;
   var currentquestion="";
   var currentsubqueston="";
-  var current_element=".ans1";
+  var current_element="1";
+  var noofpages=1;
+  var currentpage=1;
   var B=I=U= 0;
-  
+  var questionname="1"; 
+  function update()
+  {
+  $(".container").find("").find("table").find("td.para").html();
+  $container=$(".container");//ad page here
+  $page=$(".container").find(".page#"+currentpage); //add questions 
+  $table=$(".container").find(".page#"+currentpage).find("table."+currentpage);//add para here
+  console.log($table.html());
+  $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
+  }
+  update();
 $("document").ready(function()
 {
   $("#submit").click(function(){
@@ -198,6 +218,7 @@ $("document").ready(function()
 
 for(var i=0;i < array.length; i++)
 {	
+	
 	if(commandcall==1)
 	{	if (array[i]=="")
 		{
@@ -373,24 +394,31 @@ for(var i=0;i < array.length; i++)
 					switch(text)
 					{
 						case"line":
-							curretline++;
+							currentline++;
 							console.log("Adding Line");
+							$para.append("<l id='"+currentline+"'><br>") ;
+							
 							commandcall=0;
 							mode="";
 							submode="";
+							
 						break;
 						case "paragraph":
 						case"para":
 							console.log("Adding paragraph");
 							currentparagraph++;
+							$table.append("<tr><td class='margin' id='Q"+questionname+"'></td><td class='para' id='P"+currentparagraph+"'></td><td class='margin2'></td></tr>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							update();
 							commandcall=0;
 							mode="";
-							submode="";		
+							submode="";
+									
 			
 						break;
 						case "question":
 							console.log("Adding Question");
-							currentparagraph++;
+							currentquestion++;
 							commandcall=0;
 							mode="";
 							submode="";
@@ -398,13 +426,17 @@ for(var i=0;i < array.length; i++)
 						case "page":
 							console.log("Adding page");
 							currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
 							commandcall=0;
 							mode="";
 							submode="";
 						break;
 						default:
 							console.log("invalid command");
-							console.log("Adding Line");
 							commandcall=0;
 							mode="";
 							submode="";
@@ -415,36 +447,22 @@ for(var i=0;i < array.length; i++)
 					switch(text)
 					{
 						case"bold":
-							if((array[i+1]=="OFF")||(array[i+1]=="off")||(array[i+1]=="of")||(array[i+1]=="off"))
-							{
-							B="0"
-							}
-
-							else
-							{
-							B=1;
-							}
+							 
+							commandcall=0;
+							mode="";
+							submode="";
 						break;
 						case"italic":
-						if((array[i+1]=="OFF")||(array[i+1]=="off")||(array[i+1]=="of")||(array[i+1]=="off"))
-							{
-							U="0"
-							}
-							else
-							{
-							U=1;
-							}
-					
+								$(current_element).append("<i>") ;
+							commandcall=0;
+							mode="";
+							submode="";
 						break;
 						case"underline":
-							if((array[i+1]=="OFF")||(array[i+1]=="off")||(array[i+1]=="of")||(array[i+1]=="off"))
-							{
-							B="0"
-							}
-							else
-							{
-							B=1;
-							}
+							$(current_element).append("</u>") ;
+							commandcall=0;
+							mode="";
+							submode="";
 						break;
 						
 						default:
@@ -479,7 +497,8 @@ for(var i=0;i < array.length; i++)
 		
 	}
 	else  
-	{	var text=(array[i].toLowerCase());
+	{	
+		var text=(array[i].toLowerCase());
 		
 		switch(text)
 		{
@@ -489,29 +508,32 @@ for(var i=0;i < array.length; i++)
 			console.log("command activated");
 			break;
 			default:
-			
-			if(i!=(array.length-1))
-				{
-				$(current_element).append(array[i]+" ");
-				}
+
+			if(array[i]==array.length-1)
+			{
+
+			}
 			else
 			{
-				if($(current_element).text().length >80)
-				{
-				$(current_element).append("</br>")b vb b  ;
-				} 
-			$(current_element).append(array[i]);
+				$para.append(array[i]+" ");
 			}
+				
+		
+			
+				
+				
+			
 			break;
 		
 		}
 	}
 }
-console.log($(current_element).text());
+
 console.log("commandcall "+commandcall+" mode:"+ mode);
-console.log("LINE "+currentline +" PARA" + currentParagraph  +" QUESTION"+ currentQuestion + " ELEMENT " + current_element);
+console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
 console.log("B" + B +" I "+I+" U " +I);
-console.log("string:"+str );		
+console.log("string:"+str );
+console.log("para :"+$para);		
 });
 
 $("#print").click(function(){
@@ -519,7 +541,7 @@ $("#print").click(function(){
 	$("button").css("display","none");
 	window.print();
 	$(".page").css("width","60%");
-							$("button").css("display","block");
+	$("button").css("display","block");
 	
 	});
 	
@@ -1131,7 +1153,8 @@ press.which =28;
 //13 enter
 $("textareax").trigger(press);
   });
-
+container--> #(page)id-->table-->tr-->(td).margin
+								   -->(td).blank
 */
 
 </script>
