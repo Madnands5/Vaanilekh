@@ -447,25 +447,32 @@ for(var i=0;i < array.length; i++)
 					switch(text)
 					{
 						case"bold":
-							 
+							B=1;
 							commandcall=0;
 							mode="";
 							submode="";
 						break;
 						case"italic":
-								$(current_element).append("<i>") ;
+							I=1;
 							commandcall=0;
 							mode="";
 							submode="";
 						break;
 						case"underline":
-							$(current_element).append("</u>") ;
+							U=1;
 							commandcall=0;
 							mode="";
 							submode="";
 						break;
-						
-						default:
+						case "none":
+						B=0;
+						U=0;
+						I=0;
+						commandcall=0;
+						mode="";
+							submode="";
+						break;
+						default: 
 						break;
 					}
 				break;
@@ -508,16 +515,42 @@ for(var i=0;i < array.length; i++)
 			console.log("command activated");
 			break;
 			default:
+			if(B==0&&I==0&&U==0)
+			{console.log("style");
+				if(array[i]==array.length-1)
+				{
 
-			if(array[i]==array.length-1)
-			{
-
+				}
+				else
+				{
+					$para.append(array[i]+" ");
+				}
 			}
 			else
 			{
-				$para.append(array[i]+" ");
-			}
-				
+				sty="";
+				if(B==1)
+				{
+				sty=sty+"<B>";
+				} 
+				if(I==1)
+				{
+					sty=sty+"<i>";
+				} 
+				if(U==1)
+				{
+					sty=sty+"<U>";
+				}
+				if(array[i]==array.length-1)
+				{
+					
+				}
+				else
+				{
+					$para.append(sty+array[i]+" ");
+				}
+
+			}	
 		
 			
 				
