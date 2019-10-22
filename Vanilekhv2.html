@@ -121,6 +121,7 @@ table{
 	td
 	{
 	height:30px;
+	vertical-align: top;
 	}
 .page{
 	border:solid ;
@@ -246,20 +247,19 @@ for(var i=0;i < array.length; i++)
 			case "space":
 			mode="space";
 			case "space":
-				console.log("->");
+				$para.append("&nbsp;");
+				$para.append("&nbsp;");
 				commandcall=0;
-				mode="";
-				submode="";
 				break;
-			case "tab":
-				console.log("---=->");
-				commandcall=0;
-				mode="";
-				submode="";
-				break;
-			break;
 			case "tab":
 			mode="tab";
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				commandcall=0;
+				mode="";
+				submode="";
+				break;
 			break;
 			case "next":
 			mode="next";
@@ -505,6 +505,18 @@ for(var i=0;i < array.length; i++)
 	}
 	else  
 	{	
+		if($table.height()>=960)
+		{
+			currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							commandcall=0;
+							mode="";
+							submode="";
+		}
 		var text=(array[i].toLowerCase());
 		
 		switch(text)
@@ -516,7 +528,7 @@ for(var i=0;i < array.length; i++)
 			break;
 			default:
 			if(B==0&&I==0&&U==0)
-			{console.log("style");
+			{
 				if(array[i]==array.length-1)
 				{
 
@@ -528,28 +540,31 @@ for(var i=0;i < array.length; i++)
 			}
 			else
 			{
-				sty="";
-				if(B==1)
-				{
-				sty=sty+"<B>";
-				} 
-				if(I==1)
-				{
-					sty=sty+"<i>";
-				} 
-				if(U==1)
-				{
-					sty=sty+"<U>";
-				}
-				if(array[i]==array.length-1)
-				{
-					
-				}
-				else
-				{
-					$para.append(sty+array[i]+" ");
-				}
 
+		
+					console.log("height"+$table.height());
+					sty="";
+					if(B==1)
+					{
+					sty=sty+"<B>";
+					} 
+					if(I==1)
+					{
+						sty=sty+"<i>";
+					} 
+					if(U==1)
+					{
+						sty=sty+"<U>";
+					}
+					if(array[i]==array.length-1)
+					{
+						
+					}
+					else
+					{
+						$para.append(sty+array[i]+" ");
+					}
+				
 			}	
 		
 			
@@ -566,7 +581,8 @@ console.log("commandcall "+commandcall+" mode:"+ mode);
 console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
 console.log("B" + B +" I "+I+" U " +I);
 console.log("string:"+str );
-console.log("para :"+$para);		
+console.log("para :"+$para);	
+console.log("height"+$table.height());	
 });
 
 $("#print").click(function(){
