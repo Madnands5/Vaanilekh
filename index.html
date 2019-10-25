@@ -15,7 +15,7 @@ body {
 }
 .sidenav {
   height: 100%;
-  width: 0;
+	width:0;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -24,74 +24,45 @@ body {
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  text-align:center;
+  color:white;
+
 }
-.sidenav a {
-  padding: 8px 8px 8px 32px;
+
+.sidenav input {
+	background-color: grey;
+	width:80%;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color:white;
   display: block;
   transition: 0.3s;
+  padding-bottom: 10px;
+  text-align: center;
+
 }
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left-left: 50px;
-}
+
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-.sidenav2 {
-  right: 0;
-}
-.sidenav2 {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.sidenav2 a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-.sidenav2 a:hover {
-  color: #f1f1f1;
-}
-.sidenav2 .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left-left: 50px;
-}
-@media screen and (max-height: 450px) {
-  .sidenav2 {padding-top: 15px;}
-  .sidenav2 a {font-size: 18px;}
-}
 </style>
 <style>
 @media print {
-  .page{page-break-before: always;}
+  .page{page-break-before: always;
+	-webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+    color-adjust: exact !important; 
+	box-shadow:30px 20px #a5a1a1 exact !important;
+	.page img{
+		display:inline;
+	}
+  }
 }
 @page {
   size: A4;
   margin: 0;
+
 }
 .margin{
 	border-right:solid;
@@ -100,12 +71,12 @@ vertical-align: top;
 	}
 .margin2{
 
-	width:0%;
+	width:2%;
 
 	}
-.blank{
+.para{
 	
-	width:90%;
+	width:88%;
 
 	}
 table{
@@ -121,12 +92,17 @@ table{
 	td
 	{
 	height:30px;
+	vertical-align: top;
 	}
 .page{
-	border:solid ;
-	box-shadow:5px 5px black;
+
+	box-shadow:30px 20px #a5a1a1;  !important;
 	width:60%;
-	height:1100px;
+	height:1030px;
+	margin-top:50px;
+	background-image: url("https://img.freepik.com/free-vector/wrinkled-paper-texture_1100-12.jpg?size=338&ext=jpg"); !important;
+  	background-color: #cccccc;
+	margin-bottom:20PX;  
 	}
 textarea{
 	decoration:none;
@@ -137,26 +113,52 @@ textarea{
 </style>
 </head>
 <body>
+	
 <center>
 
 	<input type="text" id="command">
 	enter here;
 	<input type="button" id="submit">
-	<div class="container" style="height:auto">
-	<div class="page" id="1" >
-		<table>
-
-		<tr>
-		<td class="margin" id="Q1" >
-				Q1:]
-			<td class="blank" id="ans1">
-			
-			</td>
-			<td class="margin2">
-			</td>
-		</tr>
-	</table>
+	
+	<div id="mySidenav" class="sidenav">
+			<center>
+			Name:<br>
+			<input type="text" id="name">
+			Roll no:<br>
+			<input type="text" id="roll">		
+			Center no:<br>
+			<input type="text" id="center">
+			Seat no:<br>
+			<input type="text" id="seat">
+			University:<br>
+			<input type="text" id="university">
+			School:<br>
+			<input type="text" id="school">
+			State:<br>
+			<input type="text" id="state">
+			City:<br>
+			<input type="text" id="city">
+			</center>
 	</div>
+	<div class="container" style="height:auto">
+		<div class="page" id="1" >
+			<table class="1">
+
+				<tr>
+					<td class="margin" id="Q1">
+						Q1:]
+					</td>
+					
+					<td class="para" id="P1">
+						
+					</td>
+					<td class="margin2">
+					</td>
+					
+				</tr>
+			
+			</table>
+		</div>
 	</div>
 
 	<button id="print">
@@ -173,499 +175,485 @@ textarea{
 
 
 <script type="text/javascript">
+ function openNav() {
+  document.getElementById("mySidenav").style.width = "50%";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+  var pageheigth="970";
+  sty="";
+    
   var recognizing;
+  var totalinpage=0;
   var commandcall=0;
-  var mode="Profile";
+  var mode="";
   var submode="name";
-  var lineno=0;
-  var total_line=0;
-  var linedata="";
-  var currerntline=0;
-  var icount=0;
-  var strx="";
-  var current_element="#ans1";
+  var currentline=0;
+  var currentparagraph=1;
+  var currentquestion="";
+  var currentsubqueston="";
+  var current_element="1";
+  var noofpages=1;
+  var currentpage=1;
+  var B=I=U= 0;
+  var questionname="1"; 
+  function update()
+  {
+  $(".container").find("").find("table").find("td.para").html();
+  $container=$(".container");//ad page here
+  $page=$(".container").find(".page#"+currentpage); //add questions 
+  $table=$(".container").find(".page#"+currentpage).find("table."+currentpage);//add para here
+  console.log($table.html());
+  $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
+  $para.append("<l id='"+currentline+"'><br>");
+  $line=$para.find("l#"+currentline);
+  }
+  update();
+$("document").ready(function()
+{
   $("#submit").click(function(){
 
-		console.clear();
-	    var str = $("#command").val()+" ";
+	//console.clear();
+	var str = $("#command").val()+" ";
+	console.clear();
+	var array  = str.split(" ");
 	
-	console.log("commandcall "+commandcall+" mode:"+ mode+" submode:");
-  var array  = str.split(" ");
-if(array[1]!=undefined)
-{
-	  for(var i=0;i < array.length; i++)
-	  {
-		switch(array[i])
+for(var i=0;i < array.length; i++)
+{	
+	
+	if(commandcall==1)
+	{	if (array[i]=="")
 		{
-		case "VL":
-		case "BL":
-		case "Vl":
-		case "Bl":
-		case "vl":
-		case "bl":
-		commandcall=1;
-		console.log(commandcall);
-		break;
-		case "Profile":
-		case "profile":
-			if(commandcall==1)
-			{
-				mode="Profile";
-				console.log("mode"+mode);
-			
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Name":
-		case "name":
-		if((commandcall==1)&&(mode=="Profile"))
-			{
-					console.log("Your name is ");
-					for(var j=i;j<array.length;j++)
-					{
-					console.log(array[j]);
-					}
-					return false;
-			
-			}
-
-				break;
-		case "roll":
-		case "Roll":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="Roll";
-				console.log("Your roll no is "+array[i+2]);
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-		case "seat":
-		case "Seat":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="Seat";
-				console.log("Your Seat no is "+array[i+2]);
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-		case "center":
-		case "center":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="center";
-				console.log("Your center no is "+array[i+2]);
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-		break;
-				
-		case "university":
-		case "University":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="University";
-				console.log("Your University name is ");
-				for(var j=i;j<array.length;j++)
-				{
-				console.log(array[j]);
-				}
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-		case "State":
-		case "State":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="State";
-				console.log("Your state is ");
-				for(var j=i;j<array.length;j++)
-				{
-				console.log(array[j]);
-				}
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-		case "City":
-		case "city":
-		case "CT":
-		case "ct":
-		case "Ct":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="City";
-				console.log("Your city is ");
-				for(var j=i;j<array.length;j++)
-				{
-				console.log(array[j]);
-				}
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-			
-		case "board":
-		case "Board":
-		case "boored":
-		case "bored":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="Board";
-				console.log("Your Board is ");
-				for(var j=i;j<array.length;j++)
-				{
-				console.log(array[j]);
-				}
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-			break;
-		case "save":
-			if((commandcall==1)&&(mode=="Profile"))
-			{
-				submode="save";
-				console.log("Your Board is ");
-				for(var j=i;j<array.length;j++)
-				{
-				console.log(array[j]);
-				}
-				return false;
-			}
-			else
-			{
-			console.log(array[i]);
-			}
-		break;
-		case "Editor":
-		case "editor":
-			if(commandcall==1)
-			{
-				mode="Editor";
-				console.log("mode"+mode);
-				
-				
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Next":
-		case "next":
-			if((commandcall==1)&&(mode=="Editor"))
-			{	submode="Next";
-				if((array[i+1]=="Line")||(array[i+1]=="line"))
-				{
-				console.log("<br></td><td class='margin'><td/><td class='blank'>");
-				return false;
-				}
-				else if((array[i+1]=="Question")||(array[i+1]=="question"))
-				{
-					console.log("<br></td ><td class='margin'>");
-						return false;
-				}
-				else if((array[i+1]=="Paragraph")||(array[i+1]=="paragraph"))
-				{
-					console.log("<br><br>&nbsp");
-						return false;
-				}
-				else if((array[i+1]=="Page")||(array[i+1]=="page"))
-				{
-				$(".container").append("<div class='page' id='1'><table><tr><td class='margin' id='Q1' > Q1:]<td class='blank' id='ans1'>");
-					return false;
-				}
-				
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Navigate":
-		case "navigate":
-			if(commandcall==1)
-			{
-				mode="Navigate";
-				console.log("mode"+mode);
-				
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "up":
-		case "Up":console.log("Up");
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Up";
-				console.log("MOve curosr ^ ");
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Down":
-		case "down":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Down";
-				console.log("MOve curosr V ");
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Left":
-		case "left":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Left";
-				console.log("MOve curosr <- ");
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Right":
-		case "right":
-		case "Write":
-		case "write":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Right";
-				console.log("MOve curosr -> ");
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Delete":
-		case "delete":
-			if((commandcall==1)&&(mode=="Editor"))
-			{	submode="Delete";
-				
-				if((array[i+1]=="Line")||(array[i+1]=="line"))
-				{
-					console.log("delete 1 line");
-					return false;
-				}
-				else if((array[i+1]=="Paragraph")||(array[i+1]=="paragraph"))
-				{
-					console.log("delete paragraph");
-					return false;
-				}
-				else if((array[i+1]=="Start")||(array[i+1]=="start"))
-				{
-					console.log("keep deleting till stop is said");
-					submode="Delete";
-					return false;
-				}
-				else
-				{
-				console.log("delete 1 charecter");
-				}
-				
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Stop":
-		case "stop":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	if(submode="Delete")
-				{
-				console.log("Stop deleting");
-				submode="";
-				return false;
-				}	
-			}	
-			else
-			{
-				console.log(array[i]);
-			}
-		case "Space":
-		case "space":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Space";
-				console.log("add space here");
-				return false;
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
-		case "Tab":
-		case "tab":
-			if((commandcall==1)&&(mode=="Navigate"))
-			{	submode="Tab";
-				console.log("add tabspace here ");
-				return false;
-			}
-			else
-			{
-				console.log(array[i]);
-			}
-			break;
+	
+		}
+		else
+		{
 		
-		case "Commands":
-		case "Commands":
-			if(commandcall==1)
+			var text=(array[i].toLowerCase());
+			switch(text)
 			{
-				mode="Commands";
-				console.log("mode"+mode);
-				console.log("show all Commands");
-				
-			}
-			else
-			{
-				console.log(array[i]);
-			}
+			case "profile":
+			openNav();
+			mode="profile";
+			break;				
+			case "navigate":
+			mode="navigate";
 			break;
-		case "exit":
-		case "Exit":
-		if(commandcall==1)
-			{
-			
+			case "exit":
+			commandcall=0;
 			mode="";
 			submode="";
-			console.log("Exit mode");
-			commandcall=0;return false;
+			case "delete":
+			mode="delete";
+			break;
+			case "space":
+			mode="space";
+			case "space":
+				$para.append("&nbsp;");
+				$para.append("&nbsp;");
+				commandcall=0;
+				break;
+			case "tab":
+			mode="tab";
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				commandcall=0;
+				mode="";
+				submode="";
+				break;
+			break;
+			case "next":
+			mode="next";
+			break;
+			case "style":
+			mode="style";
+			break;
+			case "document":
+			mode="document";
+			break;
+			default :
+				switch(mode)
+				{
+				case "profile":
+					
+					switch(text)
+					{
+						case "name":
+							submode="name"
+							
+							var name="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							name+=array[j]+" ";
+							}
+						
+							$("#name").val("");
+							$("#name").val(name);
+							name="";
+							return false;
+						break;
+						case "roll":
+		
+							submode="Roll"
+							$("#roll").val(array[i+2]);
+							return false;
+						break;
+						case "seat":
+
+							submode="Seat"
+							$("#seat").val(array[i+2]);
+							return false;
+							break;
+						case "center":
+
+							submode="Center"
+							$("#center").val(array[i+2]);
+							return false;
+							break;
+						case "university":
+							submode="University";
+							var uname="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							uname+=array[j]+" ";
+							}
+						
+							$("#university").val("");
+							$("#university").val(uname);
+							uname="";
+						
+							return false;
+							break;
+						case "school":
+							submode="school";
+							var sname="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							sname+=array[j]+" ";
+							}
+						
+							$("#school").val("");
+							$("#school").val(sname);
+							uname="";
+						
+							return false;
+						break;
+						case "state":
+							submode="State";
+							$("#state").val(array[i+1]);
+							return false;
+							break;
+						case "city":
+						case "ct":
+						submode="city";
+						$("#city").val(array[i+1]);
+							return false;
+							break;	
+						
+						case "save":
+						
+							closeNav();
+							mode="";
+							submode="";
+							commandcall=0;
+							break;
+							
+						
+						default:
+						console.log("invalid command in "+mode);
+						break;
+					}
+				break;
+				case "navigate":
+					switch(text)
+					{
+						case "up":
+							console.log("^Up");
+							break;
+						case "down":
+							console.log("vDown");
+							break;
+						case "left":
+							console.log("<left");
+							break;
+						case "right":
+							console.log("rigth>");
+							break;
+							
+						default:
+						break;	
+						
+					}
+						
+				break;
+				case "delete":
+					switch(text)
+					{
+					case "line":
+					var lio=[];
+					lastIndex=0;
+					var t=$line.html();
+					 lio[0] = t.lastIndexOf("?");
+					 lio[1] = t.lastIndexOf(".");
+					 lio[2] = t.lastIndexOf("\n");
+					 lio[3] = t.lastIndexOf("\t");
+				
+					lastIndex=Math.max.apply(Math,lio); 
+					console.log(lastIndex);
+					t = t.substring(0, lastIndex);
+					$para.html(t);
+					commandcall=0;
+					break;
+					case"paragraph":
+					case"para":
+					 	$data= $(".page").find("td.para#P"+currentparagraph).parent();
+						$page.remove($data);
+						update();
+
+					break;
+					case "Charecter":
+					var t=$para.text();
+					
+					len=(t.length-1);
+					
+					t=t.slice(0,len-2);
+					
+					console.log(t);
+					$para.text(t);
+					commandcall=0;
+					break;
+					case "word":
+					var t=$.trim($line.text());
+					
+					
+					var lastIndex = t.lastIndexOf(" ");
+					t = t.substring(0, lastIndex);
+					
+					console.log(t);
+					$para.text(t);
+					commandcall=0;
+					$line.text(t);
+					commandcall=0;
+
+					break;
+					case "start":
+					
+					break;
+					case "stop":
+					
+					break;
+					default:
+					break;
+					}
+				break;
+				
+				case "next":
+					switch(text)
+					{
+						case"line":
+							currentline++;
+							console.log("Adding Line");
+							$para.append("<l id='"+currentline+"'><br>") ;
+							
+							commandcall=0;
+							mode="";
+							submode="";
+							
+						break;
+						case "paragraph":
+						case"para":
+							console.log("Adding paragraph");
+							currentparagraph++;
+							$table.append("<tr><td class='margin' id='Q"+questionname+"'></td><td class='para' id='P"+currentparagraph+"'></td><td class='margin2'></td></tr>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							update();
+							commandcall=0;
+							mode="";
+							submode="";
+									
+			
+						break;
+						case "question":
+							console.log("Adding Question");
+							currentquestion++;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case "page":
+							console.log("Adding page");
+							currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						default:
+							console.log("invalid command");
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+					}
+				break;
+				case "style":
+					switch(text)
+					{
+						case"bold":
+							B=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case"italic":
+							I=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case"underline":
+							U=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case "none":
+						B=0;
+						U=0;
+						I=0;
+						commandcall=0;
+						mode="";
+							submode="";
+						break;
+						default: 
+						break;
+					}
+				break;
+				case "document":
+					switch(text)
+					{
+						case"save":
+					
+						break;
+						case "print":
+							$(".page").css("width","100%");
+							$("button").css("display","none");
+							window.print();
+							$(".page").css("width","60%");
+							$("button").css("display","none");
+							break;
+							commandcall=0;
+						default:
+						break;
+					}
+				break;
+				default:
+				console.log("invalid");
+				break;
+				}
 			break;
 			}
-		else
-		{
-		console.log(array[i]); 
-		}
-		break;
-		default :
-		
-		strx = strx+" "+array[i];
-		if(strx.length>80)
-		{
-			$(current_element).append("<br>");
-			$(current_element).append(array[i]);
-			console.log(strx.length);
-			strx="";
-		
-		
-		}
-		else
-		{
-		$("#ans1").append(" "+array[i]);
-		}
-		break ;
+			
 		}	
-	  }
- } 
-});
-	
-  /*var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = false;
-  reset();
-  recognition.onend = reset;
-  recognition.onresult = function (event) {
-    var finaldata = "";
-    var final = "";
-    for (var i = 0; i < event.results.length; ++i) {
-	//commands for software
-	switch( event.results[i].transcript)
-	{
-	case 'Vl':
-	case 'VL':
-	case 'VL':
-		commandcall=1;
-	break;
-	case 'Profile' :
-	if (commandcall==1)
-	{
-		mode="Profile";
-	
+		
 	}
-	else
-	break;
-	default:
-	//add text to data
-	 final += event.results[i].transcript;
-	break;
+	else  
+	{	
+		if($table.height()>=960)
+		{
+			currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							commandcall=0;
+							mode="";
+							submode="";
+		}
+		var text=(array[i].toLowerCase());
+		
+		switch(text)
+		{	
+			case "vl":
+			case "VL":
+			commandcall=1;
+			console.log("command activated");
+			break;
+			default:
+			if(B==0&&I==0&&U==0)
+			{
+				if(array[i]==array.length-1)
+				{
+
+				}
+				else
+				{	
+					
+					$line.append(array[i]+" ");
+				}
+			}
+			else
+			{	
+					if(B==1)
+					{
+					sty=sty+"<B>";
+					} 
+					if(I==1)
+					{
+						sty=sty+"<i>";
+					} 
+					if(U==1)
+					{
+						sty=sty+"<U>";
+					}
+					if(array[i]==array.length-1)
+					{
+						
+					}
+					else
+					{
+						$line.append(sty+array[i]+" ");
+					}
+				
+			}	
+		
+			
+				
+		
+			
+			break;
+		
+		}
 	}
- 
 }
-	$("#final").append(finaldata);
-  }
-  function reset() {
-    recognizing = false;
-    button.innerHTML = "Click to Speak";
+if($para.find("l#"+currentline).text().length> 80)
+{	
+	currentline++;
+	
+	update();
+}
+console.log("commandcall "+commandcall+" mode:"+ mode);
+console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
+console.log("B" + B +" I "+I+" U " +I);
+console.log("string:"+str );
+console.log("para :"+$para);	
+console.log("height"+$table.height());	
+});
 
-  }
-  function toggleStartStop() {
-    if (recognizing) {
-      recognition.stop();
-      reset();
-    } 
-	else {
-      recognition.start();
-      recognizing = true;
-    }
-  }
-*/
-
-$(document).ready(function(){
-/*  $("textarea").keypress(function(e){
- var c = $("textarea").val()+(String.fromCharCode(e.which))
-  if(e.which==127)
-  {
-  //delete
-  }
-
-  // $("textarea").val(c);
-    return false;
-  });
-  $("button").click(function(){
-      var press = jQuery.Event("keypress");
-press.ctrlKey = false;
-press.which =28; 
-//9 tab
-//32 space 
-//13 enter
-$("textareax").trigger(press);
-  });
-*/
 $("#print").click(function(){
 	$(".page").css("width","100%");
 	$("button").css("display","none");
 	window.print();
+	$(".page").css("width","60%");
+	$("button").css("display","block");
 	
 	});
 	
