@@ -1,0 +1,125 @@
+ans1:
+den=[2000,1000,500,200,100,50,20,10,5,2,1]
+t=int(input("enter test cases"))
+a=[]
+def func(a):
+  c=0
+  while(c<=10):
+    if((a-den[c])>=0):
+      print(den[c])
+      a=a-den[c]
+    else:
+      c=c+1
+for n in range (t):
+  a.append(int(input("enter amount")))
+for amt in a:   
+  count=0;
+
+  print("for case ",count)
+  func(amt)
+  count=count+1
+
+=============================================================================
+ans2:
+
+def LCSubStr(X, Y, m, n): 
+	
+
+	LCSuff = [[0 for k in range(n+1)] for l in range(m+1)] 
+	
+
+	result = 0
+
+	for i in range(m + 1): 
+		for j in range(n + 1): 
+			if (i == 0 or j == 0): 
+				LCSuff[i][j] = 0
+			elif (X[i-1] == Y[j-1]): 
+				LCSuff[i][j] = LCSuff[i-1][j-1] + 1
+				result = max(result, LCSuff[i][j]) 
+			else: 
+				LCSuff[i][j] = 0
+	return result 
+Y=[]
+X=[]
+lx=[]
+ly=[]
+t=int(input("enter test cases"))
+for n in range (t):
+  x,y=input("lenghts of strings ").split()
+  lx.append(x)
+  ly.append(y)
+  X.append(input("string1"))
+  Y.append(input("string2"))
+
+for i in range (t):
+  
+  m = len(X[i]) 
+  n = len(Y[i]) 
+  print(m,lx[i],n,ly[i])
+  if((m==int(lx[i]))and(n==int(ly[i]))):
+    print('Length of Longest Common Substring for case:',i,'is', 
+					LCSubStr(X[i], Y[i], m, n)) 
+  else:
+    print("invalid string lengths for case:",i)
+
+=============================================================================
+ans3:
+is=[]
+size=[]
+cents=[]
+t=int(input("enter test cases"))
+for n in range (t):
+	size.append(int(input("SIze:")))
+	is[n]=input("enter elements");
+	cents.append(int(input("SIze:")))
+for n in range(t):
+	
+=============================================================================
+ans4:
+a=[]
+x=[]
+for i in range(3):
+	X,Y,Z=input("Enter row").split()
+	a.append(X)
+	a.append(Y)
+	a.append(Z)
+#FIND 0 IN list 
+# find missing numbers 
+for i in range(9)
+	
+print(a[0:2])
+print(a[3:5])
+print(a[6:8])
+
+=============================================================================
+ans5:
+list=[]
+size=input("enter size")
+list=input("Enter row").split()
+
+=============================================================================
+ans6:
+x1,v1,x2,v2=input("x1 v1 x2 v2").split()
+
+
+if (int(v2) < int(v1)) and ((int(x2) - int(x1)) % (int(v2) - int(v1))) == 0:
+	print("YES")
+else:
+	print("NO")
+=============================================================================
+ans7:
+n=input("numer of candles");
+list1=[]
+inpstr=input("height of candles").split()
+print(inpstr)
+for a in inpstr:
+  list1.append(int(a))
+if(len(list1)==n):
+  x=max(list1)
+  print(list1.count(x))
+else:
+  print("wrong number of candles")
+============================================================================
+ans8:
+=============================================================================
