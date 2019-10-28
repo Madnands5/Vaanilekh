@@ -65,38 +65,93 @@ for i in range (t):
 
 =============================================================================
 ans3:
-is=[]
-size=[]
-cents=[]
+
+def count(S, m, c ): 
+
+	if (c == 0): 
+		return 1
+
+	if (c < 0): 
+		return 0; 
+
+
+	if (m <=0 and c >= 1): 
+		return 0
+
+	return count( S, m - 1, c ) + count( S, m, c-S[m-1] ); 
+
 t=int(input("enter test cases"))
+elist=[]
+cents=[]
+size=[]
+arr=[]
 for n in range (t):
 	size.append(int(input("SIze:")))
-	is[n]=input("enter elements");
-	cents.append(int(input("SIze:")))
+	elist.append(input("M enter elements"));
+	cents.append(int(input("n:")))
 for n in range(t):
-	
+  m=0;arr=[];
+  inpstr = elist[n].split();
+  for a in inpstr:
+    arr.append(int(a)) 
+  m = len(arr) 
+  print(count(arr, m, cents[n])) 
 =============================================================================
 ans4:
 a=[]
-x=[]
+x=[]#not in
+y=[]#pos
+c=1
 for i in range(3):
 	X,Y,Z=input("Enter row").split()
-	a.append(X)
-	a.append(Y)
-	a.append(Z)
-#FIND 0 IN list 
-# find missing numbers 
-for i in range(9)
-	
-print(a[0:2])
-print(a[3:5])
-print(a[6:8])
+	a.append(int(X))
+	a.append(int(Y))
+	a.append(int(Z))
+while(c<=9):
+  if(a.count(c)>0):
+    c=c+1
+  else:
+    x.append(c)
+    c=c+1
+for n, i in enumerate(a):
+  if i == 0:
+    a[n] = x.pop()
+print(a)
 
 =============================================================================
 ans5:
-list=[]
-size=input("enter size")
-list=input("Enter row").split()
+
+def maxSubArraySum(a,size): 
+
+	max_so_far = 0
+	max_ending_here = 0
+	start = 0
+	end = 0
+	s = 0
+
+	for i in range(0,size): 
+
+		max_ending_here += a[i] 
+
+		if max_so_far < max_ending_here: 
+			max_so_far = max_ending_here 
+			start = s 
+			end = i 
+
+		if max_ending_here < 0: 
+			max_ending_here = 0
+			s = i+1
+
+	print ("Maximum contiguous sum is %d"%(max_so_far)) 
+
+
+# Driver program to test maxSubArraySum 
+arr = [] 
+strg=input("enter elements").split()
+
+for a in strg:
+  arr.append(int(a))
+maxSubArraySum(arr,len(arr)) 
 
 =============================================================================
 ans6:
@@ -112,7 +167,6 @@ ans7:
 n=input("numer of candles");
 list1=[]
 inpstr=input("height of candles").split()
-print(inpstr)
 for a in inpstr:
   list1.append(int(a))
 if(len(list1)==n):
@@ -122,4 +176,6 @@ else:
   print("wrong number of candles")
 ============================================================================
 ans8:
+
+
 =============================================================================
