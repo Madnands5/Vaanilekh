@@ -64,6 +64,9 @@ body {
   margin: 0;
 
 }
+w{
+	color:red;
+}
 .margin{
 	border-right:solid;
 	width:10%;
@@ -71,12 +74,12 @@ vertical-align: top;
 	}
 .margin2{
 
-	width:2%;
+	width:5%;
 
 	}
 .para{
 	
-	width:88%;
+	width:85%;
 
 	}
 table{
@@ -271,6 +274,7 @@ function closeNav() {
   var currentpage=1;
   var B=I=U= 0;
   var questionname="1"; 
+
   function update()
   {
   $(".container").find("").find("table").find("td.para").html();
@@ -297,7 +301,7 @@ function closeNav() {
   }
   update();
 $("document").ready(function()
-{
+{   var wno=0;
   $("#submit").click(function(){
 
 
@@ -475,9 +479,47 @@ for(var i=0;i < array.length; i++)
 
 						case "left":
 							console.log("<left");
+							var x=$line.html().trim();
+							console.log(x);
+							
+							var words =x.split(" ");  
+							var n=words.length ;
+							 wno++;
+							console.log(wno);
+							console.log(n) ;
+							console.log(words) ;
+							var c=words[n-wno];
+							console.log(c);
+							var num=n-wno;
+							words[num]="<w>"+c+"</w>";
+							console.log(words);
+							var text;
+							$line.html("");
+
+							for (i = 0; i <n ; i++)
+							{ 
+
+							$line.append(words[i]+" ");
+							}
 							break;
 						case "right":
 							console.log("rigth>");
+							var x=$line.html();
+							var words =x.split(" ");  
+							var n=words.length ;
+							var wno=1;
+							console.log(n) ;
+							var c=words[n-wno];console.log(c);
+							words[n-wno]="<w>"+c+"</w>";
+							console.log(words);
+							var text;
+							$line.html("");
+
+							for (i = 0; i <n ; i++)
+							{ 
+
+							$line.append(words[i]+" ");
+							}
 							break;
 							
 						default:
@@ -733,7 +775,7 @@ for(var i=0;i < array.length; i++)
 		}
 	}
 }
-if($para.find("l#"+currentline).text().length> 80)
+if($para.find("l#"+currentline).text().length> 110)
 {	
 	currentline++;
 	
