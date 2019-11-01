@@ -225,6 +225,7 @@ else
 
   </script>
   <script type="text/javascript">
+
 	//script for voise to text
 		var recognizing;
 		var recognition = new webkitSpeechRecognition();
@@ -258,8 +259,7 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
   var pageheigth="970";
-  sty="";
-    
+  sty=""; 
   var recognizing;
   var totalinpage=0;
   var commandcall=0;
@@ -274,7 +274,65 @@ function closeNav() {
   var currentpage=1;
   var B=I=U= 0;
   var questionname="1"; 
+  var wno=0;
+function left()
+{
+	var x=$line.html().trim();
+							console.log(x);
+							
+							var words =x.split(" ");  
+							var n=words.length ;
+							 
+							console.log("wno"+wno);
+							console.log("n"+n);
+							console.log("words"+words);
+							var prev=words[n-wno];
+							var newprev=$line.find("w").text();
+							words[n-wno]=newprev;
+							wno++;
 
+							var c=words[n-wno];
+							console.log(c);
+							var num=n-wno;
+							
+							
+							words[num]="<w>"+c+"</w>";
+							console.log(words);
+							var text;
+						
+							$line.html("");
+
+							for (i = 0; i<n ; i++)
+							{ 
+							$line.append(words[i]+" ");
+							}
+}
+function right()
+{
+	var x=$line.html().trim();
+							console.log(x);
+							
+							var words =x.split(" ");  
+							var n=words.length ;
+							 
+							console.log("wno"+wno);
+							console.log("n"+n);
+							console.log("words"+words);
+							wno--;
+							var c=words[n-wno];
+							console.log(c);
+							var num=n-wno;
+							words[num]="<w>"+c+"</w>";
+							console.log(words);
+							var text;
+						
+							$line.html("");
+
+							for (i = 0; i<n ; i++)
+							{ 
+							$line.append(words[i]+" ");
+							}
+}
   function update()
   {
   $(".container").find("").find("table").find("td.para").html();
@@ -285,7 +343,7 @@ function closeNav() {
   $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
   $para.append("<l id='"+currentline+"'><br>");
   $line=$para.find("l#"+currentline);
-  
+
   if (recognizing)
   	{
 		recognition.stop();
@@ -301,7 +359,7 @@ function closeNav() {
   }
   update();
 $("document").ready(function()
-{   var wno=0;
+{   
   $("#submit").click(function(){
 
 
@@ -330,6 +388,7 @@ for(var i=0;i < array.length; i++)
 			case "navigate":
 			mode="navigate";
 			$line.css("background-color","YELLOW");
+			
 			break;
 			case "exit":
 			commandcall=0;
@@ -459,7 +518,7 @@ for(var i=0;i < array.length; i++)
 				break;
 				case "navigate":
 					switch(text)
-					{
+					{	
 						case "up":
 							console.log("^Up");
 							$line.removeAttr("style");
@@ -479,47 +538,12 @@ for(var i=0;i < array.length; i++)
 
 						case "left":
 							console.log("<left");
-							var x=$line.html().trim();
-							console.log(x);
+							left();
 							
-							var words =x.split(" ");  
-							var n=words.length ;
-							 wno++;
-							console.log(wno);
-							console.log(n) ;
-							console.log(words) ;
-							var c=words[n-wno];
-							console.log(c);
-							var num=n-wno;
-							words[num]="<w>"+c+"</w>";
-							console.log(words);
-							var text;
-							$line.html("");
-
-							for (i = 0; i <n ; i++)
-							{ 
-
-							$line.append(words[i]+" ");
-							}
 							break;
 						case "right":
 							console.log("rigth>");
-							var x=$line.html();
-							var words =x.split(" ");  
-							var n=words.length ;
-							var wno=1;
-							console.log(n) ;
-							var c=words[n-wno];console.log(c);
-							words[n-wno]="<w>"+c+"</w>";
-							console.log(words);
-							var text;
-							$line.html("");
-
-							for (i = 0; i <n ; i++)
-							{ 
-
-							$line.append(words[i]+" ");
-							}
+							right();
 							break;
 							
 						default:
@@ -787,6 +811,7 @@ console.log("B" + B +" I "+I+" U " +I);
 console.log("string:"+str );
 console.log("para :"+$para);	
 console.log("height"+$table.height());	
+console.log("wno"+wno);
 });
 
 $("#print").click(function(){
