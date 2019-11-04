@@ -2,10 +2,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </script>
   <script src="helper.js">
   </script>
@@ -116,7 +118,27 @@ textarea{
 </style>
 </head>
 <body>
-	
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+		Launch demo modal
+	  </button>
+	  
+	  <!-- Modal -->
+	  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content">
+			<div class="modal-body">
+				<br>
+				Speak for changing the selected line:	
+			  <input type="textarea" name="replacer" id="replacer" style="width:100%;">
+			  <br><br>
+			  	<center>
+				<button  type="button" class="btn btn-primary">Say "" to  replace current text with selected line</button>
+				<center>
+			</div>
+
+		  </div>
+		</div>
+	  </div>
 <center>
 
 	<input type="text" id="command">
@@ -174,6 +196,12 @@ textarea{
 
 <button id="button" onclick="toggleStartStop()"></button>
 </center>
+<script>
+	 
+$("document").ready(function()
+{  $("#exampleModalCenter").modal('show');
+});	
+</script>
 <script >
 	//script for saving data
 	myStorage = window.localStorage;
@@ -213,7 +241,7 @@ else
 	recognition.onresult = function (event) {
 	  for (var i = event.resultIndex; i < event.results.length; ++i) {
 		if (event.results[i].isFinal) {
-		  console.log( event.results[i][0].transcript);
+		  textarea.value += event.results[i][0].transcript;
 		}
 	  }
 	}
