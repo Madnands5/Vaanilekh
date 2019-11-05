@@ -354,13 +354,13 @@ if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } 
 else {
-
+  showInfo('Started');
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
-  recognition.interimResults = true;
+  recognition.interimResults = false;
 
   recognition.onstart = function() {
-	  showInfo('Started');
+	  alert('Started');
     recognizing = true;
     showInfo('info_speak_now');
 
