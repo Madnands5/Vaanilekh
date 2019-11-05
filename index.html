@@ -320,32 +320,36 @@ if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } 
 else {
+	
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.onstart = function() {
     recognizing = true;
+    console.log("Start");
     console.log('info_speak_now');
 
   };
   recognition.onerror = function(event) {
+	  
     if (event.error == 'no-speech') {
-
+		console.log("No speech");
       console.log('info_no_speech');
       ignore_onend = true;
     }
     if (event.error == 'audio-capture') {
-
+		console.log("no microphone");
       console.log('info_no_microphone');
       ignore_onend = true;
     }
     if (event.error == 'not-allowed') {
-
+		console.log("Not allowed");
       ignore_onend = true;
     }
   };
   recognition.onend = function() {
     recognizing = false;
+    console.log("end");
     if (ignore_onend) {
       return;
     }
@@ -366,6 +370,7 @@ else {
   
   recognition.onresult = function(event) {
     var interim_transcript = '';
+    console.log("Result");
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
@@ -397,7 +402,7 @@ function startButton(event) {
   ignore_onend = false;
 
 
-
+	console.log("Startbutton");
   console.log('info_allow');
 
 
