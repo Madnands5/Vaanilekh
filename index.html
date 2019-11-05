@@ -360,6 +360,7 @@ else {
   recognition.interimResults = true;
 
   recognition.onstart = function() {
+	  showInfo('Started');
     recognizing = true;
     showInfo('info_speak_now');
 
