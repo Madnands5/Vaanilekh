@@ -234,6 +234,7 @@ else
 }
 </script>
   <script type="text/javascript">
+	  
   var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -298,6 +299,7 @@ else
  ['日本語',           ['ja-JP']],
  ['Lingua latīna',   ['la']]];
   for (var i = 0; i < langs.length; i++) {
+  
   select_language.options[i] = new Option(langs[i][0], i);
 }
 select_language.selectedIndex = 6;
@@ -316,7 +318,8 @@ function updateCountry() {
 }
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
-} else {
+} 
+else {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -387,15 +390,16 @@ function startButton(event) {
     recognition.stop();
     return;
   }
+  
   final_transcript = '';
-  recognition.lang = select_dialect.value;
+  recognition.lang = "en-IN";
   recognition.start();
   ignore_onend = false;
 
-  interim_span.innerHTML = '';
+
 
   console.log('info_allow');
-  showButtons('none');
+
 
 }
 </script>
@@ -929,3 +933,4 @@ $("#print").click(function(){
    
 </body>
 </html> 
+ 
