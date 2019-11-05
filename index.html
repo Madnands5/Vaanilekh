@@ -6,7 +6,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </script>
   <script src="helper.js">
@@ -123,7 +122,7 @@ textarea{
 	  </button>
 	  
 	  <!-- Modal -->
-	  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" >
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content">
 			<div class="modal-body">
@@ -132,19 +131,28 @@ textarea{
 			  <input type="textarea" name="replacer" id="replacer" style="width:100%;">
 			  <br><br>
 			  	<center>
-				<button  type="button" class="btn btn-primary">Say "" to  replace current text with selected line</button>
+				<button  type="button" class="btn btn-primary">Say "Patch" to  replace current text with selected line</button>
+				<button  type="button" class="btn  btn-danger">Say "Abort" to  replace current text with selected line</button>
+				 
 				<center>
+					
 			</div>
 
 		  </div>
 		</div>
 	  </div>
 <center>
-
+	
 	<input type="text" id="command">
 	enter here;
+	 <button id="start_button" onclick="startButton(event)">start</button>
 	<input type="button" id="submit">
 	
+	  <div id="div_language">
+    <select id="select_language" onchange="updateCountry()"></select>
+    &nbsp;&nbsp;
+    <select id="select_dialect"></select>
+  </div>
 	<div id="mySidenav" class="sidenav">
 			<center>
 			Name:<br>
@@ -196,12 +204,7 @@ textarea{
 
 <button id="button" onclick="toggleStartStop()"></button>
 </center>
-<script>
-	 
-$("document").ready(function()
-{  $("#exampleModalCenter").modal('show');
-});	
-</script>
+
 <script >
 	//script for saving data
 	myStorage = window.localStorage;
@@ -230,53 +233,173 @@ else
 	
 }
 </script>
-<script type="text/javascript">
-//script for voise to text
-	var recognizing;
-	var recognition = new SpeechRecognition();
-	recognition.continuous = true;
-	reset();
-	recognition.onend = reset;
-  
-	recognition.onresult = function (event) {
-	  for (var i = event.resultIndex; i < event.results.length; ++i) {
-		if (event.results[i].isFinal) {
-		  textarea.value += event.results[i][0].transcript;
-		}
-	  }
-	}
-  
-	function reset() {
-	  recognizing = false;
-	}
-  
-
-  </script>
   <script type="text/javascript">
+  var langs =
+[['Afrikaans',       ['af-ZA']],
+ ['Bahasa Indonesia',['id-ID']],
+ ['Bahasa Melayu',   ['ms-MY']],
+ ['Català',          ['ca-ES']],
+ ['Čeština',         ['cs-CZ']],
+ ['Deutsch',         ['de-DE']],
+ ['English',         ['en-AU', 'Australia'],
+                     ['en-CA', 'Canada'],
+                     ['en-IN', 'India'],
+                     ['en-NZ', 'New Zealand'],
+                     ['en-ZA', 'South Africa'],
+                     ['en-GB', 'United Kingdom'],
+                     ['en-US', 'United States']],
+ ['Español',         ['es-AR', 'Argentina'],
+                     ['es-BO', 'Bolivia'],
+                     ['es-CL', 'Chile'],
+                     ['es-CO', 'Colombia'],
+                     ['es-CR', 'Costa Rica'],
+                     ['es-EC', 'Ecuador'],
+                     ['es-SV', 'El Salvador'],
+                     ['es-ES', 'España'],
+                     ['es-US', 'Estados Unidos'],
+                     ['es-GT', 'Guatemala'],
+                     ['es-HN', 'Honduras'],
+                     ['es-MX', 'México'],
+                     ['es-NI', 'Nicaragua'],
+                     ['es-PA', 'Panamá'],
+                     ['es-PY', 'Paraguay'],
+                     ['es-PE', 'Perú'],
+                     ['es-PR', 'Puerto Rico'],
+                     ['es-DO', 'República Dominicana'],
+                     ['es-UY', 'Uruguay'],
+                     ['es-VE', 'Venezuela']],
+ ['Euskara',         ['eu-ES']],
+ ['Français',        ['fr-FR']],
+ ['Galego',          ['gl-ES']],
+ ['Hrvatski',        ['hr_HR']],
+ ['IsiZulu',         ['zu-ZA']],
+ ['Íslenska',        ['is-IS']],
+ ['Italiano',        ['it-IT', 'Italia'],
+                     ['it-CH', 'Svizzera']],
+ ['Magyar',          ['hu-HU']],
+ ['Nederlands',      ['nl-NL']],
+ ['Norsk bokmål',    ['nb-NO']],
+ ['Polski',          ['pl-PL']],
+ ['Português',       ['pt-BR', 'Brasil'],
+                     ['pt-PT', 'Portugal']],
+ ['Română',          ['ro-RO']],
+ ['Slovenčina',      ['sk-SK']],
+ ['Suomi',           ['fi-FI']],
+ ['Svenska',         ['sv-SE']],
+ ['Türkçe',          ['tr-TR']],
+ ['български',       ['bg-BG']],
+ ['Pусский',         ['ru-RU']],
+ ['Српски',          ['sr-RS']],
+ ['한국어',            ['ko-KR']],
+ ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+                     ['cmn-Hans-HK', '普通话 (香港)'],
+                     ['cmn-Hant-TW', '中文 (台灣)'],
+                     ['yue-Hant-HK', '粵語 (香港)']],
+ ['日本語',           ['ja-JP']],
+ ['Lingua latīna',   ['la']]];
+  for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+select_language.selectedIndex = 6;
+updateCountry();
+select_dialect.selectedIndex = 6;
+console.log('info_start');
+function updateCountry() {
+  for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+    select_dialect.remove(i);
+  }
+  var list = langs[select_language.selectedIndex];
+  for (var i = 1; i < list.length; i++) {
+    select_dialect.options.add(new Option(list[i][1], list[i][0]));
+  }
+  select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+}
+if (!('webkitSpeechRecognition' in window)) {
+  upgrade();
+} else {
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.onstart = function() {
+    recognizing = true;
+    console.log('info_speak_now');
 
-	//script for voise to text
-		var recognizing;
-		var recognition = new webkitSpeechRecognition();
-		recognition.continuous = true;
-		reset();
-		recognition.onend = reset;
-	  
-		recognition.onresult = function (event) {
-		  for (var i = event.resultIndex; i < event.results.length; ++i) {
-			if (event.results[i].isFinal) {
-			  //textarea.value += event.results[i][0].transcript;
-			  //---->
-			  //loop here
-			}
-		  }
-		}
-	  
-		function reset() {
-		  recognizing = false;
-		}
-	  
-	
-	  </script>
+  };
+  recognition.onerror = function(event) {
+    if (event.error == 'no-speech') {
+
+      console.log('info_no_speech');
+      ignore_onend = true;
+    }
+    if (event.error == 'audio-capture') {
+
+      console.log('info_no_microphone');
+      ignore_onend = true;
+    }
+    if (event.error == 'not-allowed') {
+
+      ignore_onend = true;
+    }
+  };
+  recognition.onend = function() {
+    recognizing = false;
+    if (ignore_onend) {
+      return;
+    }
+
+    if (!final_transcript) {
+      console.log('info_start');
+      return;
+    }
+    console.log('');
+    if (window.getSelection) {
+      window.getSelection().removeAllRanges();
+      var range = document.createRange();
+    
+      window.getSelection().addRange(range);
+    }
+
+  };
+  
+  recognition.onresult = function(event) {
+    var interim_transcript = '';
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    final_transcript = capitalize(final_transcript);
+    $("command").val(final_transcript);
+
+  };
+}
+function upgrade() {
+
+  console.log('info_upgrade');
+}
+
+
+
+function startButton(event) {
+  if (recognizing) {
+    recognition.stop();
+    return;
+  }
+  final_transcript = '';
+  recognition.lang = select_dialect.value;
+  recognition.start();
+  ignore_onend = false;
+
+  interim_span.innerHTML = '';
+
+  console.log('info_allow');
+  showButtons('none');
+
+}
+</script>
+
 <script type="text/javascript">
 //script for text to html
  function openNav() {
@@ -286,6 +409,7 @@ else
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
   var pageheigth="970";
   sty=""; 
   var recognizing;
@@ -302,65 +426,9 @@ function closeNav() {
   var currentpage=1;
   var B=I=U= 0;
   var questionname="1"; 
-  var wno=0;
-function left()
-{
-	var x=$line.html().trim();
-							console.log(x);
-							
-							var words =x.split(" ");  
-							var n=words.length ;
-							 
-							console.log("wno"+wno);
-							console.log("n"+n);
-							console.log("words"+words);
-							var prev=words[n-wno];
-							var newprev=$line.find("w").text();
-							words[n-wno]=newprev;
-							wno++;
 
-							var c=words[n-wno];
-							console.log(c);
-							var num=n-wno;
-							
-							
-							words[num]="<w>"+c+"</w>";
-							console.log(words);
-							var text;
-						
-							$line.html("");
+  var editor=0;
 
-							for (i = 0; i<n ; i++)
-							{ 
-							$line.append(words[i]+" ");
-							}
-}
-function right()
-{
-	var x=$line.html().trim();
-							console.log(x);
-							
-							var words =x.split(" ");  
-							var n=words.length ;
-							 
-							console.log("wno"+wno);
-							console.log("n"+n);
-							console.log("words"+words);
-							wno--;
-							var c=words[n-wno];
-							console.log(c);
-							var num=n-wno;
-							words[num]="<w>"+c+"</w>";
-							console.log(words);
-							var text;
-						
-							$line.html("");
-
-							for (i = 0; i<n ; i++)
-							{ 
-							$line.append(words[i]+" ");
-							}
-}
   function update()
   {
   $(".container").find("").find("table").find("td.para").html();
@@ -372,18 +440,7 @@ function right()
   $para.append("<l id='"+currentline+"'><br>");
   $line=$para.find("l#"+currentline);
 
-  if (recognizing)
-  	{
-		recognition.stop();
-		reset();
-	  	recognition.start();
-		recognizing = true;
-	}
-  else
-  	{
-		recognition.start();
-		recognizing = true;
-  	}
+
   }
   update();
 $("document").ready(function()
@@ -415,8 +472,9 @@ for(var i=0;i < array.length; i++)
 			break;				
 			case "navigate":
 			mode="navigate";
+			editor=currentline;
+			$line=$para.find("l#"+editor);
 			$line.css("background-color","YELLOW");
-			
 			break;
 			case "exit":
 			commandcall=0;
@@ -450,6 +508,12 @@ for(var i=0;i < array.length; i++)
 			break;
 			case "document":
 			mode="document";
+			break;
+			case "symbol":
+			mode="symbol";
+			case "edit":
+			$('#exampleModalCenter').modal('toggle');
+
 			break;
 			default :
 				switch(mode)
@@ -549,36 +613,34 @@ for(var i=0;i < array.length; i++)
 					{	
 						case "up":
 							console.log("^Up");
+							
 							$line.removeAttr("style");
-							currentline--;
-							$line=$para.find("l#"+currentline);
+							if(editor>0)
+							{
+							editor--;
+							$line=$para.find("l#"+editor);
 							$line.css("background-color","yellow");
+							}	
 							return false;
 							break;
 						case "down":
 							console.log("vDown");
 							$line.removeAttr("style");
-							currentline++;
+							if(editor<currentline)
+							{
+							editor++;
 							$line=$para.find("l#"+currentline);
 							$line.css("background-color","yellow");
+							}
 							return false;
 							break;
 
-						case "left":
+						case "edit":
 							console.log("<left");
-							left();
-							
+							mode="edit";
+							$("#exampleModalCenter").show();
 							break;
-						case "right":
-							console.log("rigth>");
-							right();
-							break;
-							
-						default:
-						break;	
-						
-					}
-						
+						}
 				break;
 				case "delete":
 					switch(text)
@@ -747,10 +809,19 @@ for(var i=0;i < array.length; i++)
 						break;
 					}
 				break;
+				case "symbol":
+				//check symbol;
+				case "edit":
+				//-->
+				
+				break;
+				
 				default:
 				console.log("invalid");
 				break;
+
 				}
+
 			break;
 			}
 			
@@ -839,7 +910,7 @@ console.log("B" + B +" I "+I+" U " +I);
 console.log("string:"+str );
 console.log("para :"+$para);	
 console.log("height"+$table.height());	
-console.log("wno"+wno);
+
 });
 
 $("#print").click(function(){
