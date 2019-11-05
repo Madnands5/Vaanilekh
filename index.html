@@ -166,7 +166,9 @@ textarea{
   <p id="info_upgrade">Web Speech API is not supported by this browser.
      Upgrade to <a href="//www.google.com/chrome">Chrome</a>
      version 25 or later.</p>
+    
 </div>
+<p id="infox">asdsa das</p>
 <div class="right">
   <button id="start_button" onclick="startButton(event)">
    Start</button>
@@ -354,7 +356,7 @@ if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } 
 else {
-  showInfo('Started');
+  $("#infox").append('Started');
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
@@ -385,9 +387,11 @@ else {
       }
       ignore_onend = true;
     }
+     $("#infox").append('Error');
   };
 
   recognition.onend = function() {
+	   $("#infox").append('End');
     recognizing = false;
     if (ignore_onend) {
       return;
@@ -416,13 +420,15 @@ else {
     var interim_transcript = '';
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
+		  
         final_transcript += event.results[i][0].transcript;
+      
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
     }
     final_transcript = capitalize(final_transcript);
-   $("l0").append(linebreak(final_transcript));
+   $("#infox").html(final_transcript);
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
