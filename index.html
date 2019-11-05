@@ -422,7 +422,7 @@ else {
       }
     }
     final_transcript = capitalize(final_transcript);
-    final_span.innerHTML = linebreak(final_transcript);
+   $("l0").append(linebreak(final_transcript));
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
@@ -486,11 +486,12 @@ function startButton(event) {
   final_transcript = '';
   recognition.lang = select_dialect.value;
   recognition.start();
+  
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
 
-  showInfo('info_allow');
+  showInfo('Start');
   showButtons('none');
   start_timestamp = event.timeStamp;
 }
