@@ -516,10 +516,7 @@ function showButtons(style) {
   current_style = style;
 
 }
-</script>
 
-
-<script type="text/javascript">
 //script for text to html
  function openNav() {
   document.getElementById("mySidenav").style.width = "50%";
@@ -898,6 +895,7 @@ for(var i=0;i < array.length; i++)
 							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
 							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
 							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							update();
 							commandcall=0;
 							mode="";
 							submode="";
@@ -985,7 +983,8 @@ for(var i=0;i < array.length; i++)
 	{	
 		if($table.height()>=960)
 		{
-			currentpage++;
+			console.log("Adding page");
+							currentpage++;
 							noofpages++;
 							currentparagraph++;
 							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
@@ -994,6 +993,7 @@ for(var i=0;i < array.length; i++)
 							commandcall=0;
 							mode="";
 							submode="";
+							update();
 		}
 		var text=(array[i].toLowerCase());
 		
@@ -1061,7 +1061,8 @@ console.log("commandcall "+commandcall+" mode:"+ mode);
 console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
 console.log("B" + B +" I "+I+" U " +I);
 console.log("string:"+str );
-console.log("para :"+$para);	
+console.log("para :"+$para);
+console.log("paragraph number: "+currentparagraph);	
 console.log("height"+$table.height());	
 
 
