@@ -8,573 +8,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </script>
-  <script src="helper.js">
-  </script>
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-.sidenav {
-  height: 100%;
-	width:0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  text-align:center;
-  color:white;
+  <script>
+	  function x(str)
+{
 
-}
-
-.sidenav input {
-	background-color: grey;
-	width:80%;
-  text-decoration: none;
-  font-size: 25px;
-  color:white;
-  display: block;
-  transition: 0.3s;
-  padding-bottom: 10px;
-  text-align: center;
-
-}
-
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-<style>
-@media print {
-  .page{page-break-before: always;
-	-webkit-print-color-adjust: exact !important; /*Chrome, Safari */
-    color-adjust: exact !important; 
-	box-shadow:30px 20px #a5a1a1 exact !important;
-	.page img{
-		display:inline;
-	}
-  }
-}
-@page {
-  size: A4;
-  margin: 0;
-
-}
-w{
-	color:red;
-}
-.margin{
-	border-right:solid;
-	width:10%;
-vertical-align: top;
-	}
-.margin2{
-
-	width:5%;
-
-	}
-.para{
-	
-	width:85%;
-
-	}
-table{
-	margin:0px;
-	margin-top:50px;
-	margin:bottom:50px;
-	width:100%;
-	}
-	tr
-	{
-	height:25px;
-	}
-	td
-	{
-	height:30px;
-	vertical-align: top;
-	}
-.page{
-
-	box-shadow:30px 20px #a5a1a1;  !important;
-	width:60%;
-	height:1030px;
-	margin-top:50px;
-	background-image: url("https://img.freepik.com/free-vector/wrinkled-paper-texture_1100-12.jpg?size=338&ext=jpg"); !important;
-  	background-color: #cccccc;
-	margin-bottom:20PX;  
-	}
-textarea{
-	decoration:none;
-	border:none;
-	border-right:solid;
-	}
-	
-</style>
-</head>
-<body>
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-		Launch demo modal
-	  </button>
-	  
-	  <!-- Modal -->
-	  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content">
-			<div class="modal-body">
-				<br>
-				Speak for changing the selected line:	
-			  <input type="textarea" name="replacer" id="replacer" style="width:100%;">
-			  <br><br>
-			  	<center>
-				<button  type="button" class="btn btn-primary">Say "Patch" to  replace current text with selected line</button>
-				<button  type="button" class="btn  btn-danger">Say "Abort" to  replace current text with selected line</button>
-				 
-				<center>
-					
-			</div>
-
-		  </div>
-		</div>
-	  </div>
-<center>
-	
-	<input type="text" id="command">
-	enter here;
-	
-	<input type="button" id="submit" name="submit">
-	
-    Web Speech API</a> Demonstration</h1>
-<div id="info">
-  <p id="info_start">Click on the microphone icon and begin speaking.</p>
-  <p id="info_speak_now">Speak now.</p>
-  <p id="info_no_speech">No speech was detected. You may need to adjust your
-    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-      microphone settings</a>.</p>
-  <p id="info_no_microphone" style="display:none">
-    No microphone was found. Ensure that a microphone is installed and that
-    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-    microphone settings</a> are configured correctly.</p>
-  <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-  <p id="info_denied">Permission to use microphone was denied.</p>
-  <p id="info_blocked">Permission to use microphone is blocked. To change,
-    go to chrome://settings/contentExceptions#media-stream</p>
-  <p id="info_upgrade">Web Speech API is not supported by this browser.
-     Upgrade to <a href="//www.google.com/chrome">Chrome</a>
-     version 25 or later.</p>
-    
-</div>
-<p id="infox">asdsa das</p>
-<div class="right">
-  <button id="start_button" onclick="startButton(event)">
-   Start</button>
-</div>
-<div id="results">
-  <span id="final_span" class="final"></span>
-  <span id="interim_span" class="interim"></span>
-  <p>
-</div>
-<div id="div_language">
-    <select id="select_language" onchange="updateCountry()"></select>
-    &nbsp;&nbsp;
-    <select id="select_dialect"></select>
-  </div>
-	<div id="mySidenav" class="sidenav">
-			<center>
-			Name:<br>
-			<input type="text" id="name">
-			Roll no:<br>
-			<input type="text" id="roll">		
-			Center no:<br>
-			<input type="text" id="center">
-			Seat no:<br>
-			<input type="text" id="seat">
-			University:<br>
-			<input type="text" id="university">
-			School:<br>
-			<input type="text" id="school">
-			State:<br>
-			<input type="text" id="state">
-			City:<br>
-			<input type="text" id="city">
-			</center>
-	</div>
-	<div class="container" style="height:auto">
-		<div class="page" id="1" >
-			<table class="1">
-
-				<tr>
-					<td class="margin" id="Q1">
-						Q1:]
-					</td>
-					
-					<td class="para" id="P1">
-						
-					</td>
-					<td class="margin2">
-					</td>
-					
-				</tr>
-			
-			</table>
-		</div>
-	</div>
-
-	<button id="print">
-		PRINT
-		</button>	
-
-
-
-
-
-<button id="button" onclick="toggleStartStop()"></button>
-</center>
-
-<script >
-	//script for saving data
-	myStorage = window.localStorage;
-
-if(localStorage.getItem("paper") === null)
- {
-  //create paper
-  var x =$(".container").html();
-  localStorage.setItem('paper',x);
-}
-else
-{	
-	if($(".container").html()=='<div class="page" id="1" ><table class="1"><tr><td class="margin" id="Q1">Q1:]</td><td class="para" id="P1"></td><td class="margin2"></td></tr></table></div>')
-		{
-			var x=localStorage.getItem('paper');
-			$(".container").html(x);
-		}
-		else
-		{
-			window.setInterval(function(){
-			var x =$(".container").html();
-  			localStorage.setItem('paper',x);
-			}, 60000);
-
-		}
-	
-}
-</script>
-<script>
-var langs =
-[['Afrikaans',       ['af-ZA']],
- ['Bahasa Indonesia',['id-ID']],
- ['Bahasa Melayu',   ['ms-MY']],
- ['Català',          ['ca-ES']],
- ['Čeština',         ['cs-CZ']],
- ['Deutsch',         ['de-DE']],
- ['English',         ['en-AU', 'Australia'],
-                     ['en-CA', 'Canada'],
-                     ['en-IN', 'India'],
-                     ['en-NZ', 'New Zealand'],
-                     ['en-ZA', 'South Africa'],
-                     ['en-GB', 'United Kingdom'],
-                     ['en-US', 'United States']],
- ['Español',         ['es-AR', 'Argentina'],
-                     ['es-BO', 'Bolivia'],
-                     ['es-CL', 'Chile'],
-                     ['es-CO', 'Colombia'],
-                     ['es-CR', 'Costa Rica'],
-                     ['es-EC', 'Ecuador'],
-                     ['es-SV', 'El Salvador'],
-                     ['es-ES', 'España'],
-                     ['es-US', 'Estados Unidos'],
-                     ['es-GT', 'Guatemala'],
-                     ['es-HN', 'Honduras'],
-                     ['es-MX', 'México'],
-                     ['es-NI', 'Nicaragua'],
-                     ['es-PA', 'Panamá'],
-                     ['es-PY', 'Paraguay'],
-                     ['es-PE', 'Perú'],
-                     ['es-PR', 'Puerto Rico'],
-                     ['es-DO', 'República Dominicana'],
-                     ['es-UY', 'Uruguay'],
-                     ['es-VE', 'Venezuela']],
- ['Euskara',         ['eu-ES']],
- ['Français',        ['fr-FR']],
- ['Galego',          ['gl-ES']],
- ['Hrvatski',        ['hr_HR']],
- ['IsiZulu',         ['zu-ZA']],
- ['Íslenska',        ['is-IS']],
- ['Italiano',        ['it-IT', 'Italia'],
-                     ['it-CH', 'Svizzera']],
- ['Magyar',          ['hu-HU']],
- ['Nederlands',      ['nl-NL']],
- ['Norsk bokmål',    ['nb-NO']],
- ['Polski',          ['pl-PL']],
- ['Português',       ['pt-BR', 'Brasil'],
-                     ['pt-PT', 'Portugal']],
- ['Română',          ['ro-RO']],
- ['Slovenčina',      ['sk-SK']],
- ['Suomi',           ['fi-FI']],
- ['Svenska',         ['sv-SE']],
- ['Türkçe',          ['tr-TR']],
- ['български',       ['bg-BG']],
- ['Pусский',         ['ru-RU']],
- ['Српски',          ['sr-RS']],
- ['한국어',            ['ko-KR']],
- ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
-                     ['cmn-Hans-HK', '普通话 (香港)'],
-                     ['cmn-Hant-TW', '中文 (台灣)'],
-                     ['yue-Hant-HK', '粵語 (香港)']],
- ['日本語',           ['ja-JP']],
- ['Lingua latīna',   ['la']]];
-
-for (var i = 0; i < langs.length; i++) {
-  select_language.options[i] = new Option(langs[i][0], i);
-}
-select_language.selectedIndex = 6;
-updateCountry();
-select_dialect.selectedIndex = 6;
-showInfo('info_start');
-
-function updateCountry() {
-  for (var i = select_dialect.options.length - 1; i >= 0; i--) {
-    select_dialect.remove(i);
-  }
-  var list = langs[select_language.selectedIndex];
-  for (var i = 1; i < list.length; i++) {
-    select_dialect.options.add(new Option(list[i][1], list[i][0]));
-  }
-  select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
-}
-
-var create_email = false;
-var final_transcript = '';
-var recognizing = false;
-var ignore_onend;
-var start_timestamp;
-if (!('webkitSpeechRecognition' in window)) {
-  upgrade();
-} 
-else {
-  $("#infox").append('Started');
-  var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = false;
-
-  recognition.onstart = function() {
-	  alert('Started');
-    recognizing = true;
-    showInfo('info_speak_now');
-
-  };
-
-  recognition.onerror = function(event) {
-    if (event.error == 'no-speech') {
-
-      showInfo('info_no_speech');
-      ignore_onend = true;
-    }
-    if (event.error == 'audio-capture') {
-
-      showInfo('info_no_microphone');
-      ignore_onend = true;
-    }
-    if (event.error == 'not-allowed') {
-      if (event.timeStamp - start_timestamp < 100) {
-        showInfo('info_blocked');
-      } else {
-        showInfo('info_denied');
-      }
-      ignore_onend = true;
-    }
-     $("#infox").append('Error');
-  };
-
-  recognition.onend = function() {
-	   $("#infox").append('End');
-    recognizing = false;
-    if (ignore_onend) {
-      return;
-    }
-
-    if (!final_transcript) {
-      showInfo('info_start');
-      return;
-    }
-    showInfo('Started');
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-      var range = document.createRange();
-      range.selectNode(document.getElementById('final_span'));
-      window.getSelection().addRange(range);
-    }
-    if (create_email) {
-      create_email = false;
-      createEmail();
-    }
-  };
-
-
-
-  recognition.onresult = function(event) {
-    var interim_transcript = '';
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-		  
-        final_transcript += event.results[i][0].transcript;
-      
-      } else {
-        interim_transcript += event.results[i][0].transcript;
-      }
-    }
-    final_transcript = capitalize(final_transcript);
-   $("#infox").html(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
-    if (final_transcript || interim_transcript) {
-      showButtons('inline-block');
-    }
-  };
-}
-
-function upgrade() {
-  start_button.style.visibility = 'hidden';
-  showInfo('info_upgrade');
-}
-
-var two_line = /\n\n/g;
-var one_line = /\n/g;
-function linebreak(s) {
-  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-}
-
-var first_char = /\S/;
-function capitalize(s) {
-  return s.replace(first_char, function(m) { return m.toUpperCase(); });
-}
-
-function createEmail() {
-  var n = final_transcript.indexOf('\n');
-  if (n < 0 || n >= 80) {
-    n = 40 + final_transcript.substring(40).indexOf(' ');
-  }
-  var subject = encodeURI(final_transcript.substring(0, n));
-  var body = encodeURI(final_transcript.substring(n + 1));
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
-
-function copyButton() {
-  if (recognizing) {
-    recognizing = false;
-    recognition.stop();
-  }
-
-  showInfo('');
-}
-
-function emailButton() {
-  if (recognizing) {
-    create_email = true;
-    recognizing = false;
-    recognition.stop();
-  } else {
-    createEmail();
-  }
-  email_button.style.display = 'none';
-  email_info.style.display = 'inline-block';
-  showInfo('');
-}
-
-function startButton(event) {
-  if (recognizing) {
-    recognition.stop();
-    return;
-  }
-  final_transcript = '';
-  recognition.lang = select_dialect.value;
-  recognition.start();
-  
-  ignore_onend = false;
-  final_span.innerHTML = '';
-  interim_span.innerHTML = '';
-
-  showInfo('Start');
-  showButtons('none');
-  start_timestamp = event.timeStamp;
-}
-
-function showInfo(s) {
-  if (s) {
-    for (var child = info.firstChild; child; child = child.nextSibling) {
-      if (child.style) {
-        child.style.display = child.id == s ? 'inline' : 'none';
-      }
-    }
-    info.style.visibility = 'visible';
-  } else {
-    info.style.visibility = 'hidden';
-  }
-}
-
-var current_style;
-function showButtons(style) {
-  if (style == current_style) {
-    return;
-  }
-  current_style = style;
-
-}
-</script>
-
-
-<script type="text/javascript">
-//script for text to html
- function openNav() {
-  document.getElementById("mySidenav").style.width = "50%";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-
-  var pageheigth="970";
-  sty=""; 
-  var recognizing;
-  var totalinpage=0;
-  var commandcall=0;
-  var mode="";
-  var submode="name";
-  var currentline=0;
-  var currentparagraph=1;
-  var currentquestion="";
-  var currentsubqueston="";
-  var current_element="1";
-  var noofpages=1;
-  var currentpage=1;
-  var B=I=U= 0;
-  var questionname="1"; 
-
-  var editor=0;
-
-  function update()
-  {
-  $(".container").find("").find("table").find("td.para").html();
-  $container=$(".container");//ad page here
-  $page=$(".container").find(".page#"+currentpage); //add questions 
-  $table=$(".container").find(".page#"+currentpage).find("table."+currentpage);//add para here
-  console.log($table.html());
-  $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
-  $para.append("<l id='"+currentline+"'><br>");
-  $line=$para.find("l#"+currentline);
-
-
-  }
-  update();
-$("document").ready(function()
-{   
-  $("#submit").click(function(){
-
-
-	var str = $("#command").val()+" ";
 	console.clear();
 	var array  = str.split(" ");
 	
@@ -592,6 +29,11 @@ for(var i=0;i < array.length; i++)
 			var text=(array[i].toLowerCase());
 			switch(text)
 			{
+			case "symbol" :
+			mode="symbol";
+			commandcall=1;
+			submode="";
+			break;
 			case "profile":
 			openNav();
 			mode="profile";
@@ -644,6 +86,21 @@ for(var i=0;i < array.length; i++)
 			default :
 				switch(mode)
 				{
+				case "symbol":
+					switch(text)
+						{
+							case"exit";
+							mode="";
+							submode="";
+							commandcall=0;
+							break;
+							default:
+							console.log("Invalid symbol");
+							break;
+						
+						}
+						return false;
+				break;
 				case "profile":
 					
 					switch(text)
@@ -1037,6 +494,568 @@ console.log("string:"+str );
 console.log("para :"+$para);	
 console.log("height"+$table.height());	
 
+
+}
+  </script>
+  <script src="helper.js">
+  </script>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+.sidenav {
+  height: 100%;
+	width:0;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:center;
+  color:white;
+
+}
+.sidenav2 {
+  height: 100%;
+	width:300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+border :solid;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:center;
+
+
+}
+.sidenav input {
+	background-color: grey;
+	width:80%;
+  text-decoration: none;
+  font-size: 25px;
+  color:white;
+  display: block;
+  transition: 0.3s;
+  padding-bottom: 10px;
+  text-align: center;
+
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+<style>
+@media print {
+  .page{page-break-before: always;
+	-webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+    color-adjust: exact !important; 
+	box-shadow:30px 20px #a5a1a1 exact !important;
+	.page img{
+		display:inline;
+	}
+  }
+}
+@page {
+  size: A4;
+  margin: 0;
+
+}
+w{
+	color:red;
+}
+.margin{
+	border-right:solid;
+	width:10%;
+vertical-align: top;
+	}
+.margin2{
+
+	width:5%;
+
+	}
+.para{
+	
+	width:85%;
+
+	}
+table{
+	margin:0px;
+	margin-top:50px;
+	margin:bottom:50px;
+	width:100%;
+	}
+	tr
+	{
+	height:25px;
+	}
+	td
+	{
+	height:30px;
+	vertical-align: top;
+	}
+.page{
+
+	box-shadow:30px 20px #a5a1a1;  !important;
+	width:100%;
+	height:1030px;
+	margin-top:50px;
+	background-image: url("https://img.freepik.com/free-vector/wrinkled-paper-texture_1100-12.jpg?size=338&ext=jpg"); !important;
+  	background-color: #cccccc;
+	margin-bottom:20PX;  
+	}
+textarea{
+	decoration:none;
+	border:none;
+	border-right:solid;
+	}
+	
+</style>
+</head>
+<body>
+	<div class="sidenav2">	
+	<input type="text" id="command">
+	enter here;
+	
+	<input type="button" id="submit" name="submit">
+	
+    Web Speech API</a> Demonstration</h1>
+<div id="info">
+  <p id="info_start">Click on the microphone icon and begin speaking.</p>
+  <p id="info_speak_now">Speak now.</p>
+  <p id="info_no_speech">No speech was detected. You may need to adjust your
+    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+      microphone settings</a>.</p>
+  <p id="info_no_microphone" style="display:none">
+    No microphone was found. Ensure that a microphone is installed and that
+    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+    microphone settings</a> are configured correctly.</p>
+  <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+  <p id="info_denied">Permission to use microphone was denied.</p>
+  <p id="info_blocked">Permission to use microphone is blocked. To change,
+    go to chrome://settings/contentExceptions#media-stream</p>
+  <p id="info_upgrade">Web Speech API is not supported by this browser.
+     Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+     version 25 or later.</p>
+    
+</div>
+<center>
+
+<p id="infox">asdsa das</p>
+<div class="right">
+  <button id="start_button" onclick="startButton(event)">
+   Start</button>
+</div>
+<div id="results">
+  <span id="final_span" class="final"></span>
+  <span id="interim_span" class="interim"></span>
+  <p>
+</div>
+<div id="div_language">
+    <select id="select_language" onchange="updateCountry()"></select>
+    &nbsp;&nbsp;
+    <select id="select_dialect"></select>
+  </div>
+</div>	
+	<div id="mySidenav" class="sidenav">
+			<center>
+			Name:<br>
+			<input type="text" id="name">
+			Roll no:<br>
+			<input type="text" id="roll">		
+			Center no:<br>
+			<input type="text" id="center">
+			Seat no:<br>
+			<input type="text" id="seat">
+			University:<br>
+			<input type="text" id="university">
+			School:<br>
+			<input type="text" id="school">
+			State:<br>
+			<input type="text" id="state">
+			City:<br>
+			<input type="text" id="city">
+			</center>
+	</div>
+
+<div class="container" style="height:auto">
+		<div class="page" id="1" >
+			<table class="1">
+
+				<tr>
+					<td class="margin" id="Q1">
+						Q1:]
+					</td>
+					
+					<td class="para" id="P1">
+						
+					</td>
+					<td class="margin2">
+					</td>
+					
+				</tr>
+			
+			</table>
+		</div>
+	</div>
+
+	<button id="print">
+		PRINT
+		</button>	
+
+
+
+
+
+<button id="button" onclick="toggleStartStop()"></button>
+</center>
+
+<script >
+	//script for saving data
+	myStorage = window.localStorage;
+
+if(localStorage.getItem("paper") === null)
+ {
+  //create paper
+  var x =$(".container").html();
+  localStorage.setItem('paper',x);
+}
+else
+{	
+	if($(".container").html()=='<div class="page" id="1" ><table class="1"><tr><td class="margin" id="Q1">Q1:]</td><td class="para" id="P1"></td><td class="margin2"></td></tr></table></div>')
+		{
+			var x=localStorage.getItem('paper');
+			$(".container").html(x);
+		}
+		else
+		{
+			window.setInterval(function(){
+			var x =$(".container").html();
+  			localStorage.setItem('paper',x);
+			}, 60000);
+
+		}
+	
+}
+</script>
+<script>
+var langs =
+[['Afrikaans',       ['af-ZA']],
+ ['Bahasa Indonesia',['id-ID']],
+ ['Bahasa Melayu',   ['ms-MY']],
+ ['Català',          ['ca-ES']],
+ ['Čeština',         ['cs-CZ']],
+ ['Deutsch',         ['de-DE']],
+ ['English',         ['en-AU', 'Australia'],
+                     ['en-CA', 'Canada'],
+                     ['en-IN', 'India'],
+                     ['en-NZ', 'New Zealand'],
+                     ['en-ZA', 'South Africa'],
+                     ['en-GB', 'United Kingdom'],
+                     ['en-US', 'United States']],
+ ['Español',         ['es-AR', 'Argentina'],
+                     ['es-BO', 'Bolivia'],
+                     ['es-CL', 'Chile'],
+                     ['es-CO', 'Colombia'],
+                     ['es-CR', 'Costa Rica'],
+                     ['es-EC', 'Ecuador'],
+                     ['es-SV', 'El Salvador'],
+                     ['es-ES', 'España'],
+                     ['es-US', 'Estados Unidos'],
+                     ['es-GT', 'Guatemala'],
+                     ['es-HN', 'Honduras'],
+                     ['es-MX', 'México'],
+                     ['es-NI', 'Nicaragua'],
+                     ['es-PA', 'Panamá'],
+                     ['es-PY', 'Paraguay'],
+                     ['es-PE', 'Perú'],
+                     ['es-PR', 'Puerto Rico'],
+                     ['es-DO', 'República Dominicana'],
+                     ['es-UY', 'Uruguay'],
+                     ['es-VE', 'Venezuela']],
+ ['Euskara',         ['eu-ES']],
+ ['Français',        ['fr-FR']],
+ ['Galego',          ['gl-ES']],
+ ['Hrvatski',        ['hr_HR']],
+ ['IsiZulu',         ['zu-ZA']],
+ ['Íslenska',        ['is-IS']],
+ ['Italiano',        ['it-IT', 'Italia'],
+                     ['it-CH', 'Svizzera']],
+ ['Magyar',          ['hu-HU']],
+ ['Nederlands',      ['nl-NL']],
+ ['Norsk bokmål',    ['nb-NO']],
+ ['Polski',          ['pl-PL']],
+ ['Português',       ['pt-BR', 'Brasil'],
+                     ['pt-PT', 'Portugal']],
+ ['Română',          ['ro-RO']],
+ ['Slovenčina',      ['sk-SK']],
+ ['Suomi',           ['fi-FI']],
+ ['Svenska',         ['sv-SE']],
+ ['Türkçe',          ['tr-TR']],
+ ['български',       ['bg-BG']],
+ ['Pусский',         ['ru-RU']],
+ ['Српски',          ['sr-RS']],
+ ['한국어',            ['ko-KR']],
+ ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+                     ['cmn-Hans-HK', '普通话 (香港)'],
+                     ['cmn-Hant-TW', '中文 (台灣)'],
+                     ['yue-Hant-HK', '粵語 (香港)']],
+ ['日本語',           ['ja-JP']],
+ ['Lingua latīna',   ['la']]];
+
+for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+select_language.selectedIndex = 6;
+updateCountry();
+select_dialect.selectedIndex = 6;
+showInfo('info_start');
+
+function updateCountry() {
+  for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+    select_dialect.remove(i);
+  }
+  var list = langs[select_language.selectedIndex];
+  for (var i = 1; i < list.length; i++) {
+    select_dialect.options.add(new Option(list[i][1], list[i][0]));
+  }
+  select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+}
+
+var create_email = false;
+var final_transcript = '';
+var recognizing = false;
+var ignore_onend;
+var start_timestamp;
+if (!('webkitSpeechRecognition' in window)) {
+  upgrade();
+} 
+else {
+  $("#infox").append('Started');
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = false;
+
+  recognition.onstart = function() {
+	  alert('Started');
+    recognizing = true;
+    showInfo('info_speak_now');
+
+  };
+
+  recognition.onerror = function(event) {
+    if (event.error == 'no-speech') {
+
+      showInfo('info_no_speech');
+      ignore_onend = true;
+    }
+    if (event.error == 'audio-capture') {
+
+      showInfo('info_no_microphone');
+      ignore_onend = true;
+    }
+    if (event.error == 'not-allowed') {
+      if (event.timeStamp - start_timestamp < 100) {
+        showInfo('info_blocked');
+      } else {
+        showInfo('info_denied');
+      }
+      ignore_onend = true;
+    }
+     $("#infox").append('Error');
+  };
+
+  recognition.onend = function() {
+	   $("#infox").html('End');
+    recognizing = false;
+    if (ignore_onend) {
+      return;
+    }
+
+    if (!final_transcript) {
+      showInfo('info_start');
+      return;
+    }
+    showInfo('Started');
+    if (window.getSelection) {
+      window.getSelection().removeAllRanges();
+      var range = document.createRange();
+      range.selectNode(document.getElementById('final_span'));
+      window.getSelection().addRange(range);
+    }
+    if (create_email) {
+      create_email = false;
+      createEmail();
+    }
+  };
+
+
+
+  recognition.onresult = function(event) {
+    var interim_transcript = '';
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+		  
+        final_transcript += event.results[i][0].transcript;
+      
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    final_transcript = capitalize(final_transcript);
+	x(final_transcript);
+    interim_span.innerHTML = linebreak(interim_transcript);
+    if (final_transcript || interim_transcript) {
+      showButtons('inline-block');
+    }
+  };
+}
+
+function upgrade() {
+  start_button.style.visibility = 'hidden';
+  showInfo('info_upgrade');
+}
+
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+function linebreak(s) {
+  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+}
+
+var first_char = /\S/;
+function capitalize(s) {
+  return s.replace(first_char, function(m) { return m.toUpperCase(); });
+}
+
+function createEmail() {
+  var n = final_transcript.indexOf('\n');
+  if (n < 0 || n >= 80) {
+    n = 40 + final_transcript.substring(40).indexOf(' ');
+  }
+  var subject = encodeURI(final_transcript.substring(0, n));
+  var body = encodeURI(final_transcript.substring(n + 1));
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+}
+
+function copyButton() {
+  if (recognizing) {
+    recognizing = false;
+    recognition.stop();
+  }
+
+  showInfo('');
+}
+
+function emailButton() {
+  if (recognizing) {
+    create_email = true;
+    recognizing = false;
+    recognition.stop();
+  } else {
+    createEmail();
+  }
+  email_button.style.display = 'none';
+  email_info.style.display = 'inline-block';
+  showInfo('');
+}
+
+function startButton(event) {
+  if (recognizing) {
+    recognition.stop();
+    return;
+  }
+  final_transcript = '';
+  recognition.lang = select_dialect.value;
+  recognition.start();
+  
+  ignore_onend = false;
+  final_span.innerHTML = '';
+  interim_span.innerHTML = '';
+
+  showInfo('Start');
+  showButtons('none');
+  start_timestamp = event.timeStamp;
+}
+
+function showInfo(s) {
+  if (s) {
+    for (var child = info.firstChild; child; child = child.nextSibling) {
+      if (child.style) {
+        child.style.display = child.id == s ? 'inline' : 'none';
+      }
+    }
+    info.style.visibility = 'visible';
+  } else {
+    info.style.visibility = 'hidden';
+  }
+}
+
+var current_style;
+function showButtons(style) {
+  if (style == current_style) {
+    return;
+  }
+  current_style = style;
+
+}
+</script>
+
+
+<script type="text/javascript">
+//script for text to html
+ function openNav() {
+  document.getElementById("mySidenav").style.width = "50%";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+  var pageheigth="970";
+  sty=""; 
+  var recognizing;
+  var totalinpage=0;
+  var commandcall=0;
+  var mode="";
+  var submode="name";
+  var currentline=0;
+  var currentparagraph=1;
+  var currentquestion="";
+  var currentsubqueston="";
+  var current_element="1";
+  var noofpages=1;
+  var currentpage=1;
+  var B=I=U= 0;
+  var questionname="1"; 
+
+  var editor=0;
+
+  function update()
+  {
+  $(".container").find("").find("table").find("td.para").html();
+  $container=$(".container");//ad page here
+  $page=$(".container").find(".page#"+currentpage); //add questions 
+  $table=$(".container").find(".page#"+currentpage).find("table."+currentpage);//add para here
+  console.log($table.html());
+  $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
+  $para.append("<l id='"+currentline+"'><br>");
+  $line=$para.find("l#"+currentline);
+
+
+  }
+  update();
+$("document").ready(function()
+{   
+  $("#submit").click(function(){
+	  var str = $("#command").val()+" ";
+x(str)
 });
 
 $("#print").click(function(){
