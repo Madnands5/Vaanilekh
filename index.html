@@ -8,495 +8,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </script>
-  <script>
-	  function x(str)
-{
-
-	console.clear();
-	var array  = str.split(" ");
-	
-for(var i=0;i < array.length; i++)
-{	
-	
-	if(commandcall==1)
-	{	if (array[i]=="")
-		{
-	
-		}
-		else
-		{
-		
-			var text=(array[i].toLowerCase());
-			switch(text)
-			{
-			case "symbol" :
-			mode="symbol";
-			commandcall=1;
-			submode="";
-			break;
-			case "profile":
-			openNav();
-			mode="profile";
-			break;				
-			case "navigate":
-			mode="navigate";
-			editor=currentline;
-			$line=$para.find("l#"+editor);
-			$line.css("background-color","YELLOW");
-			break;
-			case "exit":
-			commandcall=0;
-			mode="";
-			submode="";
-			case "delete":
-			mode="delete";
-			break;
-			case "space":
-			mode="space";
-			case "space":
-				$para.append("&nbsp;");
-				$para.append("&nbsp;");
-				commandcall=0;
-				break;
-			case "tab":
-			mode="tab";
-				$para.append("&emsp;");
-				$para.append("&emsp;");
-				$para.append("&emsp;");
-				commandcall=0;
-				mode="";
-				submode="";
-				break;
-			break;
-			case "next":
-			mode="next";
-			break;
-			case "style":
-			mode="style";
-			break;
-			case "document":
-			mode="document";
-			break;
-			case "symbol":
-			mode="symbol";
-			case "edit":
-			$('#exampleModalCenter').modal('toggle');
-
-			break;
-			default :
-				switch(mode)
-				{
-				case "symbol":
-					switch(text)
-						{
-							case"exit";
-							mode="";
-							submode="";
-							commandcall=0;
-							break;
-							default:
-							console.log("Invalid symbol");
-							break;
-						
-						}
-						return false;
-				break;
-				case "profile":
-					
-					switch(text)
-					{
-						case "name":
-							submode="name"
-							
-							var name="";
-							for(var j=i+1;j<array.length;j++)
-							{
-							name+=array[j]+" ";
-							}
-						
-							$("#name").val("");
-							$("#name").val(name);
-							name="";
-							return false;
-						break;
-						case "roll":
-		
-							submode="Roll"
-							$("#roll").val(array[i+2]);
-							return false;
-						break;
-						case "seat":
-
-							submode="Seat"
-							$("#seat").val(array[i+2]);
-							return false;
-							break;
-						case "center":
-
-							submode="Center"
-							$("#center").val(array[i+2]);
-							return false;
-							break;
-						case "university":
-							submode="University";
-							var uname="";
-							for(var j=i+1;j<array.length;j++)
-							{
-							uname+=array[j]+" ";
-							}
-						
-							$("#university").val("");
-							$("#university").val(uname);
-							uname="";
-						
-							return false;
-							break;
-						case "school":
-							submode="school";
-							var sname="";
-							for(var j=i+1;j<array.length;j++)
-							{
-							sname+=array[j]+" ";
-							}
-						
-							$("#school").val("");
-							$("#school").val(sname);
-							uname="";
-						
-							return false;
-						break;
-						case "state":
-							submode="State";
-							$("#state").val(array[i+1]);
-							return false;
-							break;
-						case "city":
-						case "ct":
-						submode="city";
-						$("#city").val(array[i+1]);
-							return false;
-							break;	
-						
-						case "save":
-						
-							closeNav();
-							mode="";
-							submode="";
-							commandcall=0;
-							break;
-							
-						
-						default:
-						console.log("invalid command in "+mode);
-						break;
-					}
-				break;
-				case "navigate":
-					switch(text)
-					{	
-						case "up":
-							console.log("^Up");
-							
-							$line.removeAttr("style");
-							if(editor>0)
-							{
-							editor--;
-							$line=$para.find("l#"+editor);
-							$line.css("background-color","yellow");
-							}	
-							return false;
-							break;
-						case "down":
-							console.log("vDown");
-							$line.removeAttr("style");
-							if(editor<currentline)
-							{
-							editor++;
-							$line=$para.find("l#"+currentline);
-							$line.css("background-color","yellow");
-							}
-							return false;
-							break;
-
-						case "edit":
-							console.log("<left");
-							mode="edit";
-							$("#exampleModalCenter").show();
-							break;
-						}
-				break;
-				case "delete":
-					switch(text)
-					{
-					case "line":
-					var lio=[];
-					lastIndex=0;
-					var t=$line.html();
-					 lio[0] = t.lastIndexOf("?");
-					 lio[1] = t.lastIndexOf(".");
-					 lio[2] = t.lastIndexOf("\n");
-					 lio[3] = t.lastIndexOf("\t");
-				
-					lastIndex=Math.max.apply(Math,lio); 
-					console.log(lastIndex);
-					t = t.substring(0, lastIndex);
-					$para.html(t);
-					commandcall=0;
-					break;
-					case"paragraph":
-					case"para":
-					 	$data= $(".page").find("td.para#P"+currentparagraph).parent();
-						$page.remove($data);
-						update();
-
-					break;
-					case "Charecter":
-					var t=$para.text();
-					
-					len=(t.length-1);
-					
-					t=t.slice(0,len-2);
-					
-					console.log(t);
-					$para.text(t);
-					commandcall=0;
-					break;
-					case "word":
-					var t=$.trim($line.text());
-					
-					
-					var lastIndex = t.lastIndexOf(" ");
-					t = t.substring(0, lastIndex);
-					
-					console.log(t);
-					$para.text(t);
-					commandcall=0;
-					$line.text(t);
-					commandcall=0;
-
-					break;
-					case "start":
-					
-					break;
-					case "stop":
-					
-					break;
-					default:
-					break;
-					}
-				break;
-				
-				case "next":
-					switch(text)
-					{
-						case"line":
-							currentline++;
-							console.log("Adding Line");
-							$para.append("<l id='"+currentline+"'><br>") ;
-							$line=$para.find("l#"+currentline);
-							commandcall=0;
-							mode="";
-							submode="";
-							
-						break;
-						case "paragraph":
-						case"para":
-							console.log("Adding paragraph");
-							currentparagraph++;
-							$table.append("<tr><td class='margin' id='Q"+questionname+"'></td><td class='para' id='P"+currentparagraph+"'></td><td class='margin2'></td></tr>") ;
-							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
-							update();
-							
-							commandcall=0;
-							mode="";
-							submode="";
-									
-			
-						break;
-						case "question":
-							console.log("Adding Question");
-							currentquestion++;
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-						case "page":
-							console.log("Adding page");
-							currentpage++;
-							noofpages++;
-							currentparagraph++;
-							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
-							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
-							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-						default:
-							console.log("invalid command");
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-					}
-				break;
-				case "style":
-					switch(text)
-					{
-						case"bold":
-							B=1;
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-						case"italic":
-							I=1;
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-						case"underline":
-							U=1;
-							commandcall=0;
-							mode="";
-							submode="";
-						break;
-						case "none":
-						B=0;
-						U=0;
-						I=0;
-						commandcall=0;
-						mode="";
-							submode="";
-						break;
-						default: 
-						break;
-					}
-				break;
-				case "document":
-					switch(text)
-					{
-						case"save":
-					
-						break;
-						case "print":
-							$(".page").css("width","100%");
-							$("button").css("display","none");
-							window.print();
-							$(".page").css("width","60%");
-							$("button").css("display","none");
-							window.localStorage.removeItem('paper');
-							break;
-							commandcall=0;
-						default:
-						break;
-					}
-				break;
-				case "symbol":
-				//check symbol;
-				case "edit":
-				//-->
-				
-				break;
-				
-				default:
-				console.log("invalid");
-				break;
-
-				}
-
-			break;
-			}
-			
-		}	
-		
-	}
-	else  
-	{	
-		if($table.height()>=960)
-		{
-			currentpage++;
-							noofpages++;
-							currentparagraph++;
-							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
-							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
-							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
-							commandcall=0;
-							mode="";
-							submode="";
-		}
-		var text=(array[i].toLowerCase());
-		
-		switch(text)
-		{	
-			case "vl":
-			case "VL":
-			commandcall=1;
-			console.log("command activated");
-			break;
-			default:
-			if(B==0&&I==0&&U==0)
-			{
-				if(array[i]==array.length-1)
-				{
-
-				}
-				else
-				{	
-					
-					$line.append(array[i]+" ");
-				}
-			}
-			else
-			{	
-					if(B==1)
-					{
-					sty=sty+"<B>";
-					} 
-					if(I==1)
-					{
-						sty=sty+"<i>";
-					} 
-					if(U==1)
-					{
-						sty=sty+"<U>";
-					}
-					if(array[i]==array.length-1)
-					{
-						
-					}
-					else
-					{
-						$line.append(sty+array[i]+" ");
-					}
-				
-			}	
-		
-			
-				
-		
-			
-			break;
-		
-		}
-	}
-}
-if($para.find("l#"+currentline).text().length> 110)
-{	
-	currentline++;
-	
-	update();
-}
-console.log("commandcall "+commandcall+" mode:"+ mode);
-console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
-console.log("B" + B +" I "+I+" U " +I);
-console.log("string:"+str );
-console.log("para :"+$para);	
-console.log("height"+$table.height());	
-
-
-}
-  </script>
   <script src="helper.js">
   </script>
 <style>
@@ -910,7 +421,7 @@ else {
       }
     }
     final_transcript = capitalize(final_transcript);
-	x(final_transcript);
+	x(final_transcript)
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
@@ -1068,7 +579,493 @@ $("#print").click(function(){
 	});
 	
 });
+function x(str)
+{
 
+	console.clear();
+	var array  = str.split(" ");
+	
+for(var i=0;i < array.length; i++)
+{	
+	
+	if(commandcall==1)
+	{	if (array[i]=="")
+		{
+	
+		}
+		else
+		{
+		
+			var text=(array[i].toLowerCase());
+			switch(text)
+			{
+			case "symbol" :
+			mode="symbol";
+			commandcall=1;
+			submode="";
+			break;
+			case "profile":
+			openNav();
+			mode="profile";
+			break;				
+			case "navigate":
+			mode="navigate";
+			editor=currentline;
+			$line=$para.find("l#"+editor);
+			$line.css("background-color","YELLOW");
+			break;
+			case "exit":
+			commandcall=0;
+			mode="";
+			submode="";
+			case "delete":
+			mode="delete";
+			break;
+			case "space":
+			mode="space";
+			case "space":
+				$para.append("&nbsp;");
+				$para.append("&nbsp;");
+				commandcall=0;
+				break;
+			case "tab":
+			mode="tab";
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				$para.append("&emsp;");
+				commandcall=0;
+				mode="";
+				submode="";
+				break;
+			break;
+			case "next":
+			mode="next";
+			break;
+			case "style":
+			mode="style";
+			break;
+			case "document":
+			mode="document";
+			break;
+			case "symbol":
+			mode="symbol";
+			case "edit":
+			$('#exampleModalCenter').modal('toggle');
+
+			break;
+			default :
+				switch(mode)
+				{
+				case "symbol":
+					switch(text)
+						{
+							case "exit":
+							mode="";
+							submode="";
+							commandcall=0;
+							break;
+							default:
+							console.log("Invalid symbol");
+							break;
+						
+						}
+						return false;
+				break;
+				case "profile":
+					
+					switch(text)
+					{
+						case "name":
+							submode="name"
+							
+							var name="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							name+=array[j]+" ";
+							}
+						
+							$("#name").val("");
+							$("#name").val(name);
+							name="";
+							return false;
+						break;
+						case "roll":
+		
+							submode="Roll"
+							$("#roll").val(array[i+2]);
+							return false;
+						break;
+						case "seat":
+
+							submode="Seat"
+							$("#seat").val(array[i+2]);
+							return false;
+							break;
+						case "center":
+
+							submode="Center"
+							$("#center").val(array[i+2]);
+							return false;
+							break;
+						case "university":
+							submode="University";
+							var uname="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							uname+=array[j]+" ";
+							}
+						
+							$("#university").val("");
+							$("#university").val(uname);
+							uname="";
+						
+							return false;
+							break;
+						case "school":
+							submode="school";
+							var sname="";
+							for(var j=i+1;j<array.length;j++)
+							{
+							sname+=array[j]+" ";
+							}
+						
+							$("#school").val("");
+							$("#school").val(sname);
+							uname="";
+						
+							return false;
+						break;
+						case "state":
+							submode="State";
+							$("#state").val(array[i+1]);
+							return false;
+							break;
+						case "city":
+						case "ct":
+						submode="city";
+						$("#city").val(array[i+1]);
+							return false;
+							break;	
+						
+						case "save":
+						
+							closeNav();
+							mode="";
+							submode="";
+							commandcall=0;
+							break;
+							
+						
+						default:
+						console.log("invalid command in "+mode);
+						break;
+					}
+				break;
+				case "navigate":
+					switch(text)
+					{	
+						case "up":
+							console.log("^Up");
+							
+							$line.removeAttr("style");
+							if(editor>0)
+							{
+							editor--;
+							$line=$para.find("l#"+editor);
+							$line.css("background-color","yellow");
+							}	
+							return false;
+							break;
+						case "down":
+							console.log("vDown");
+							$line.removeAttr("style");
+							if(editor<currentline)
+							{
+							editor++;
+							$line=$para.find("l#"+currentline);
+							$line.css("background-color","yellow");
+							}
+							return false;
+							break;
+
+						case "edit":
+							console.log("<left");
+							mode="edit";
+							$("#exampleModalCenter").show();
+							break;
+						}
+				break;
+				case "delete":
+					switch(text)
+					{
+					case "line":
+					var lio=[];
+					lastIndex=0;
+					var t=$line.html();
+					 lio[0] = t.lastIndexOf("?");
+					 lio[1] = t.lastIndexOf(".");
+					 lio[2] = t.lastIndexOf("\n");
+					 lio[3] = t.lastIndexOf("\t");
+				
+					lastIndex=Math.max.apply(Math,lio); 
+					console.log(lastIndex);
+					t = t.substring(0, lastIndex);
+					$para.html(t);
+					commandcall=0;
+					break;
+					case"paragraph":
+					case"para":
+					 	$data= $(".page").find("td.para#P"+currentparagraph).parent();
+						$page.remove($data);
+						update();
+
+					break;
+					case "Charecter":
+					var t=$para.text();
+					
+					len=(t.length-1);
+					
+					t=t.slice(0,len-2);
+					
+					console.log(t);
+					$para.text(t);
+					commandcall=0;
+					break;
+					case "word":
+					var t=$.trim($line.text());
+					
+					
+					var lastIndex = t.lastIndexOf(" ");
+					t = t.substring(0, lastIndex);
+					
+					console.log(t);
+					$para.text(t);
+					commandcall=0;
+					$line.text(t);
+					commandcall=0;
+
+					break;
+					case "start":
+					
+					break;
+					case "stop":
+					
+					break;
+					default:
+					break;
+					}
+				break;
+				
+				case "next":
+					switch(text)
+					{
+						case"line":
+							currentline++;
+							console.log("Adding Line");
+							$para.append("<l id='"+currentline+"'><br>") ;
+							$line=$para.find("l#"+currentline);
+							commandcall=0;
+							mode="";
+							submode="";
+							
+						break;
+						case "paragraph":
+						case"para":
+							console.log("Adding paragraph");
+							currentparagraph++;
+							$table.append("<tr><td class='margin' id='Q"+questionname+"'></td><td class='para' id='P"+currentparagraph+"'></td><td class='margin2'></td></tr>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							update();
+							
+							commandcall=0;
+							mode="";
+							submode="";
+									
+			
+						break;
+						case "question":
+							console.log("Adding Question");
+							currentquestion++;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case "page":
+							console.log("Adding page");
+							currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						default:
+							console.log("invalid command");
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+					}
+				break;
+				case "style":
+					switch(text)
+					{
+						case"bold":
+							B=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case"italic":
+							I=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case"underline":
+							U=1;
+							commandcall=0;
+							mode="";
+							submode="";
+						break;
+						case "none":
+						B=0;
+						U=0;
+						I=0;
+						commandcall=0;
+						mode="";
+							submode="";
+						break;
+						default: 
+						break;
+					}
+				break;
+				case "document":
+					switch(text)
+					{
+						case"save":
+					
+						break;
+						case "print":
+							$(".page").css("width","100%");
+							$("button").css("display","none");
+							window.print();
+							$(".page").css("width","60%");
+							$("button").css("display","none");
+							window.localStorage.removeItem('paper');
+							break;
+							commandcall=0;
+						default:
+						break;
+					}
+				break;
+				case "symbol":
+				//check symbol;
+				case "edit":
+				//-->
+				
+				break;
+				
+				default:
+				console.log("invalid");
+				break;
+
+				}
+
+			break;
+			}
+			
+		}	
+		
+	}
+	else  
+	{	
+		if($table.height()>=960)
+		{
+			currentpage++;
+							noofpages++;
+							currentparagraph++;
+							$container.append("<div class='page' id='"+noofpages+"' ><table class='"+currentpage+"'><tr><td class='margin' id='Q"+questionname+"'></td> <td class='para' id='P"+currentparagraph+"'></td> <td class='margin2'></td><tr></table>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							$table=$(".container").find(".page#"+currentpage).find("table."+currentpage);
+							commandcall=0;
+							mode="";
+							submode="";
+		}
+		var text=(array[i].toLowerCase());
+		
+		switch(text)
+		{	
+			case "vl":
+			case "VL":
+			commandcall=1;
+			console.log("command activated");
+			break;
+			default:
+			if(B==0&&I==0&&U==0)
+			{
+				if(array[i]==array.length-1)
+				{
+
+				}
+				else
+				{	
+					
+					$line.append(array[i]+" ");
+				}
+			}
+			else
+			{	
+					if(B==1)
+					{
+					sty=sty+"<B>";
+					} 
+					if(I==1)
+					{
+						sty=sty+"<i>";
+					} 
+					if(U==1)
+					{
+						sty=sty+"<U>";
+					}
+					if(array[i]==array.length-1)
+					{
+						
+					}
+					else
+					{
+						$line.append(sty+array[i]+" ");
+					}
+				
+			}	
+		
+			
+				
+		
+			
+			break;
+		
+		}
+	}
+}
+if($para.find("l#"+currentline).text().length> 110)
+{	
+	currentline++;
+	
+	update();
+}
+console.log("commandcall "+commandcall+" mode:"+ mode);
+console.log("LINE "+currentline +" PARA" + currentparagraph  +" QUESTION"+ currentquestion + " ELEMENT " + current_element);
+console.log("B" + B +" I "+I+" U " +I);
+console.log("string:"+str );
+console.log("para :"+$para);	
+console.log("height"+$table.height());	
+
+
+}
 
 </script>
    
