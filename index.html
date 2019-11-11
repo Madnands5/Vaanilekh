@@ -3,7 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,6 +14,7 @@
 <style>
 body {
   font-family: "Lato", sans-serif;
+  
 }
 .sidenav {
   height: 100%;
@@ -30,7 +32,8 @@ body {
 
 }
 .sidenav2 {
-  height: 100%;
+
+  height: 400px;
 	width:300px;
   position: fixed;
   z-index: 1;
@@ -110,12 +113,12 @@ table{
 	td
 	{
 	height:30px;
-	vertical-align: top;
 	}
+
 .page{
 
 	box-shadow:30px 20px #a5a1a1;  !important;
-	width:100%;
+	width:80%;
 	height:1030px;
 	margin-top:50px;
 	background-image: url("https://img.freepik.com/free-vector/wrinkled-paper-texture_1100-12.jpg?size=338&ext=jpg"); !important;
@@ -131,6 +134,30 @@ textarea{
 </style>
 </head>
 <body>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" >
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	<input type="text" style="width:100%;height:50px;" id="replacer">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Abort</button>
+        <button type="button" class="btn btn-success">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<div class="sidenav2">	
 	<input type="text" id="command">
 	enter here;
@@ -157,7 +184,7 @@ textarea{
      version 25 or later.</p>
     
 </div>
-<center>
+
 
 <p id="infox">asdsa das</p>
 <div class="right">
@@ -195,7 +222,7 @@ textarea{
 			<input type="text" id="city">
 			</center>
 	</div>
-
+<center>
 <div class="container" style="height:auto">
 		<div class="page" id="1" >
 			<table class="1">
@@ -527,7 +554,7 @@ function closeNav() {
 }
 
   var pageheigth="970";
-  sty=""; 
+  var sty=""; 
   var recognizing;
   var totalinpage=0;
   var commandcall=0;
@@ -555,9 +582,12 @@ function closeNav() {
   $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
   $para.append("<l id='"+currentline+"'><br>");
   $line=$para.find("l#"+currentline);
-
+$('html, body').animate({
+                    scrollTop: $line.offset().top-350
+                }, 0020);
 
   }
+
   update();
 $("document").ready(function()
 {   
@@ -568,11 +598,14 @@ x(str)
 
 $("#print").click(function(){
 	$(".page").css("width","100%");
+	$(".page").css("height","100%");
 	$("button").css("display","none");
+	$(".sidenav2").css("display","none");
 	window.print();
-	$(".page").css("width","60%");
+	$(".page").css("width","80%");
+	$(".page").css("height","1030px");
 	$("button").css("display","block");
-	
+	$(".sidenav2").css("display","block");
 	});
 	
 });
@@ -766,10 +799,16 @@ for(var i=0;i < array.length; i++)
 							
 							$line.removeAttr("style");
 							if(editor>0)
+							{	
+								editor--;
+								$line=$("l#"+editor);
+								$('html, body').animate({
+								scrollTop: $line.offset().top-350
+								}, 0020);
+								$line.css("background-color","yellow");
+							}
+							else
 							{
-							editor--;
-							$line=$para.find("l#"+editor);
-							$line.css("background-color","yellow");
 							}	
 							return false;
 							break;
@@ -778,9 +817,16 @@ for(var i=0;i < array.length; i++)
 							$line.removeAttr("style");
 							if(editor<currentline)
 							{
-							editor++;
-							$line=$para.find("l#"+currentline);
-							$line.css("background-color","yellow");
+								editor++;
+								$line=$("l#"+editor);
+								$('html, body').animate({
+								scrollTop: $line.offset().top-350
+								}, 0020);
+								$line.css("background-color","yellow");
+							}
+							else
+							{
+							
 							}
 							return false;
 							break;
@@ -960,8 +1006,6 @@ for(var i=0;i < array.length; i++)
 						break;
 					}
 				break;
-				case "symbol":
-				//check symbol;
 				case "edit":
 				//-->
 				
@@ -1051,7 +1095,7 @@ for(var i=0;i < array.length; i++)
 		}
 	}
 }
-if($para.find("l#"+currentline).text().length> 110)
+if($para.find("l#"+currentline).text().length> 80)
 {	
 	currentline++;
 	
