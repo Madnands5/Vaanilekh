@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,9 +72,7 @@ border :solid;
 	-webkit-print-color-adjust: exact !important; /*Chrome, Safari */
     color-adjust: exact !important; 
 	box-shadow:30px 20px #a5a1a1 exact !important;
-	.page img{
-		display:inline;
-	}
+	
   }
 }
 @page {
@@ -121,8 +119,7 @@ table{
 	width:80%;
 	height:1030px;
 	margin-top:50px;
-	background-image: url("https://img.freepik.com/free-vector/wrinkled-paper-texture_1100-12.jpg?size=338&ext=jpg"); !important;
-  	background-color: #cccccc;
+	border:solid 1px;
 	margin-bottom:20PX;  
 	}
 textarea{
@@ -152,12 +149,15 @@ textarea{
 	<input type="text" style="width:100%;height:50px;" id="replacer">
       </div>
       <div class="modal-footer">
+		<button type="button" class="btn btn-primary " data-dismiss="modal">Clear</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Abort</button>
-        <button type="button" class="btn btn-success">Save changes</button>
+        <button type="button" class="btn btn-success">Alter</button>
       </div>
     </div>
   </div>
 </div>
+
+
 	<div class="sidenav2">	
 	<input type="text" id="command">
 	enter here;
@@ -598,7 +598,7 @@ x(str)
 
 $("#print").click(function(){
 	$(".page").css("width","100%");
-	$(".page").css("height","100%");
+	$(".page").css("height","1230px");
 	$("button").css("display","none");
 	$(".sidenav2").css("display","none");
 	window.print();
@@ -648,6 +648,8 @@ for(var i=0;i < array.length; i++)
 			commandcall=0;
 			mode="";
 			submode="";
+			$line.removeAttr("style");
+			break;
 			case "delete":
 			mode="delete";
 			break;
@@ -679,9 +681,7 @@ for(var i=0;i < array.length; i++)
 			break;
 			case "symbol":
 			mode="symbol";
-			case "edit":
-			$('#exampleModalCenter').modal('toggle');
-
+			
 			break;
 			default :
 				switch(mode)
@@ -835,7 +835,24 @@ for(var i=0;i < array.length; i++)
 							console.log("<left");
 							mode="edit";
 							$("#exampleModalCenter").show();
+							var line=$line.html();
+							switch(text)
+							{
+							case "abort":
+							mode="navigate";
+							$("#exampleModalCenter").hide();
+							$line=$("#l"+editor);
 							break;
+							case "alter":
+							$("#exampleModalCenter").hide();
+							var data=$(".replacer").html();
+							$line=$("#l"+editor);
+							$line.html(data);
+							break;
+							default:
+							$line.append(text);
+							break;
+							}	
 						}
 				break;
 				case "delete":
@@ -1025,7 +1042,7 @@ for(var i=0;i < array.length; i++)
 	}
 	else  
 	{	
-		if($table.height()>=960)
+		if($table.height()>=950)
 		{
 			console.log("Adding page");
 							currentpage++;
