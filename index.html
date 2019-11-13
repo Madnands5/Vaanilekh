@@ -412,6 +412,7 @@ else {
 
   recognition.onend = function() {
 	   $("#infox").html('End');
+	     recognition.start();
     recognizing = false;
     if (ignore_onend) {
       return;
