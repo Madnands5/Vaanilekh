@@ -202,7 +202,7 @@ textarea{
     &nbsp;&nbsp;
     <select id="select_dialect"></select>
   </div>
-   <img class="irc_mi" src="https://cdn3.iconfinder.com/data/icons/glypho-music-and-sound/64/microphone-512.png" 
+   <img class="irc_mi" src="https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif" 
    width="260" height="195" alt="Related image">
 </div>	
 	<div id="mySidenav" class="sidenav">
@@ -390,14 +390,9 @@ else {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
-  $(".irc_mi").attr("src","https://cdn3.iconfinder.com/data/icons/glypho-music-and-sound/64/microphone-512.png");
-  //start
-  recognizing = true;
-  
-  
+
   recognition.onstart = function() {
-	  console.log("restarted");
-	    $(".irc_mi").attr("src","https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif");
+	  console.log("started");
     recognizing = true;
     showInfo('info_speak_now');
 
@@ -427,7 +422,7 @@ else {
 
   recognition.onend = function() {
 	   $("#infox").html('End');
-	   $("irc_mi").attr("src","https://cdn3.iconfinder.com/data/icons/glypho-music-and-sound/64/microphone-512.png");
+	  
 	     recognition.start();
     recognizing = false;
     if (ignore_onend) {
