@@ -369,8 +369,9 @@ else {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
+  
   recognition.onstart = function() {
-	  alert('Started');
+	console.log("started");
     recognizing = true;
     showInfo('info_speak_now');
   };
@@ -395,8 +396,9 @@ else {
   };
   recognition.onend = function() {
 	   $("#infox").html('End');
-	     recognition.start();
-    recognizing = false;
+	   console.log("end");
+	   recognizing = false;
+      recognition.start();
     if (ignore_onend) {
       return;
     }
