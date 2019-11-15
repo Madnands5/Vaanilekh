@@ -525,13 +525,15 @@ function startButton(event) {
   if (recognizing) {
     recognition.stop();
     return;
+    recod=0;
   }
+  else{recog==1}
   final_transcript = '';
   recognition.lang = select_dialect.value;
-  if(recog==0)
+  if(recog==1)
   {
   recognition.start();
-  recog=1;
+
   }
   else
   {
