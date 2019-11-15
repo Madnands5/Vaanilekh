@@ -389,7 +389,7 @@ else {
   recognition.interimResults = false;
 
   recognition.onstart = function() {
-	  alert('Started');
+	  $line.append("started");
     recognizing = true;
     showInfo('info_speak_now');
 
