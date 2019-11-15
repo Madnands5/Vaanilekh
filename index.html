@@ -188,8 +188,9 @@ textarea{
 
 <p id="infox">asdsa das</p>
 <div class="right">
-  <button id="start_button" onclick="startButton(event)">
-   Start</button>
+  <button id="start_button" onclick="startButton(event)">   Start</button>
+  <button id="stop_button" onclick="stopButton(event)">
+   Stop</button>
 </div>
 <div id="results">
   <span id="final_span" class="final"></span>
@@ -290,7 +291,7 @@ var symbols = {plus:"+",minus:"-",multiply:"*",into:"*",raise:"^",divide:"/",equ
 	gamma:"gamma",delta:"&delta;",epsilon:"&delta;",theta:"&theta;",lambda:"&lambda;",limit:"lim",pie:"&pi;",pi:"&pi;",
 	omega:"&omega;",sumation:"&sum;",sum:"&sum;",proportional:"&prop;",similar:"&sim;",identical:"&equiv;",equivalent:"&equiv;",dollars:"&dollar;",dollar:"&dollar;",rupee:"&#8377;",rs:"&#8377;",rupees:"&#8377;",dot:".",colon:":",
 	};
-	
+var flag=0;
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -418,10 +419,18 @@ else {
   };
 
   recognition.onend = function() {
+	
 	   $("#infox").html('End');
 
     recognizing = false;
-    recognition.start();
+      if(flag==1)
+      {
+		  recognition.start();
+	  }
+	  else
+	  {
+	   
+	  }
     if (ignore_onend) {
       return;
     }
@@ -522,7 +531,7 @@ function startButton(event) {
   final_transcript = '';
   recognition.lang = select_dialect.value;
   recognition.start();
-  
+  flag=1;
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
@@ -531,7 +540,10 @@ function startButton(event) {
   showButtons('none');
   start_timestamp = event.timeStamp;
 }
-
+function stopButton(event){
+	flag=0;
+	recognition.stop();
+	}
 function showInfo(s) {
   if (s) {
     for (var child = info.firstChild; child; child = child.nextSibling) {
