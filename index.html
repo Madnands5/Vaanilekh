@@ -421,9 +421,13 @@ else {
 	   $("#infox").html('End');
 
     recognizing = false;
-    if(recog==0)
+    if(recog==1)
     {
     recognition.start();
+	}
+	else(recog==0)
+	{
+		console.log("end");
 	}
     if (ignore_onend) {
       return;
@@ -519,19 +523,21 @@ function emailButton() {
 
 function startButton(event) {
   if (recognizing) {
-	recog=1;
     recognition.stop();
     return;
   }
   final_transcript = '';
   recognition.lang = select_dialect.value;
-  if( recog==0)
+  if(recog==0)
   {
   recognition.start();
+  recog=1;
   }
   else
   {
-	  }
+	  recog=0;
+	  recognition.stop();
+  }
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
