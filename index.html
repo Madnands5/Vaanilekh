@@ -284,6 +284,13 @@ else
 }
 </script>
 <script>
+var symbols = {plus:"+",minus:"-",multiply:"*",into:"*",raise:"^",divide:"/",equal:"=",equals:"=",not:"!",bracket:"(",close:")",less:">",greater:">",
+	degree:"&deg;",percent:"%",modulo:"%",complement:"&comp;",square:"&sup2;",cube:"&sup2;",root:"&radic;",f:"&fnof;",n:"&sup2;",infinity:"&infin;",
+	parellel:"&parallel;",intersects:"&cap;",union:"&cup;",integral:"&int;",subset:"&sub;",superset:"&sup;",perpendicular:"&perp;",alpha:"&alpha;",beta:"&beta;",
+	gamma:"gamma",delta:"&delta;",epsilon:"&delta;",theta:"&theta;",lambda:"&lambda;",limit:"lim",pie:"&pi;",pi:"&pi;",
+	omega:"&omega;",sumation:"&sum;",sum:"&sum;",proportional:"&prop;",similar:"&sim;",identical:"&equiv;",equivalent:"&equiv;",dollars:"&dollar;",dollar:"&dollar;",rupee:"&#8377;",rs:"&#8377;",rupees:"&#8377;",dot:".",colon:":",
+	at:"@",};
+	
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -689,19 +696,35 @@ for(var i=0;i < array.length; i++)
 				{
 				case "symbol":
 					switch(text)
-						{
+						{	
+							
 							case "exit":
 							mode="";
 							submode="";
 							commandcall=0;
 							break;
 							default:
+							if(text.trim() in symbols)
+							{
+							$line.append(symbols[text]+" ");
+							}
+							else
+							{
 							console.log("Invalid symbol");
+							console.log(text.trim());
+								if(text!=="vl")
+								{
+								$line.append(text+" ");
+								}
+								else
+								{
+									console.log(x);
+								}
+							}
 							break;
-						
-						}
-						return false;
+					}
 				break;
+				
 				case "profile":
 					
 					switch(text)
