@@ -290,7 +290,7 @@ var symbols = {plus:"+",minus:"-",multiply:"*",into:"*",raise:"^",divide:"/",equ
 	gamma:"gamma",delta:"&delta;",epsilon:"&delta;",theta:"&theta;",lambda:"&lambda;",limit:"lim",pie:"&pi;",pi:"&pi;",
 	omega:"&omega;",sumation:"&sum;",sum:"&sum;",proportional:"&prop;",similar:"&sim;",identical:"&equiv;",equivalent:"&equiv;",dollars:"&dollar;",dollar:"&dollar;",rupee:"&#8377;",rs:"&#8377;",rupees:"&#8377;",dot:".",colon:":",
 	};
-var recog=0;
+	
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -421,14 +421,7 @@ else {
 	   $("#infox").html('End');
 
     recognizing = false;
-    if(recog==1)
-    {
     recognition.start();
-	}
-	else(recog==0)
-	{
-		console.log("end");
-	}
     if (ignore_onend) {
       return;
     }
@@ -525,21 +518,11 @@ function startButton(event) {
   if (recognizing) {
     recognition.stop();
     return;
-    recod=0;
   }
-  else{recog==1}
   final_transcript = '';
   recognition.lang = select_dialect.value;
-  if(recog==1)
-  {
   recognition.start();
-
-  }
-  else
-  {
-	  recog=0;
-	  recognition.stop();
-  }
+  
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
