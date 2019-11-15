@@ -390,9 +390,13 @@ else {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
-
+  $("irc_mi").attr("src","https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif");
+  //start
+  recognizing = true;
+  
+  
   recognition.onstart = function() {
-	  $line.append("started");
+	  console.log("restarted");
 	    $("irc_mi").attr("src","https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif");
     recognizing = true;
     showInfo('info_speak_now');
