@@ -33,7 +33,7 @@ body {
 }
 .sidenav2 {
 
-  height: 400px;
+  height: 100%;
 	width:300px;
   position: fixed;
   z-index: 1;
@@ -158,14 +158,14 @@ textarea{
 </div>
 
 
-	<div class="sidenav2">	
+<div class="sidenav2">	
 	<input type="text" id="command">
 	enter here;
 	
 	<input type="button" id="submit" name="submit">
 	
     Web Speech API</a> Demonstration</h1>
-<div id="info">
+    <div id="info">
   <p id="info_start">Click on the microphone icon and begin speaking.</p>
   <p id="info_speak_now">Speak now.</p>
   <p id="info_no_speech">No speech was detected. You may need to adjust your
@@ -182,6 +182,7 @@ textarea{
   <p id="info_upgrade">Web Speech API is not supported by this browser.
      Upgrade to <a href="//www.google.com/chrome">Chrome</a>
      version 25 or later.</p>
+  
     
 </div>
 
@@ -201,6 +202,8 @@ textarea{
     &nbsp;&nbsp;
     <select id="select_dialect"></select>
   </div>
+   <img class="irc_mi" src="https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif" 
+   width="260" height="195" alt="Related image">
 </div>	
 	<div id="mySidenav" class="sidenav">
 			<center>
@@ -390,6 +393,7 @@ else {
 
   recognition.onstart = function() {
 	  $line.append("started");
+	    $("irc_mi").attr("src","https://cdn.dribbble.com/users/829077/screenshots/4715399/comp_4_copy.gif");
     recognizing = true;
     showInfo('info_speak_now');
 
@@ -419,6 +423,7 @@ else {
 
   recognition.onend = function() {
 	   $("#infox").html('End');
+	   $("irc_mi").attr("src","https://cdn3.iconfinder.com/data/icons/glypho-music-and-sound/64/microphone-512.png");
 	     recognition.start();
     recognizing = false;
     if (ignore_onend) {
