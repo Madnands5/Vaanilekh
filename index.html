@@ -392,7 +392,7 @@ else {
   recognition.interimResults = false;
 
   recognition.onstart = function() {
-	  console.log("started");
+	  $line.append("started");
     recognizing = true;
     showInfo('info_speak_now');
 
@@ -422,7 +422,6 @@ else {
 
   recognition.onend = function() {
 	   $("#infox").html('End');
-	  
 	     recognition.start();
     recognizing = false;
     if (ignore_onend) {
