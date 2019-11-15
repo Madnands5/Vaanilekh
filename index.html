@@ -389,7 +389,7 @@ else {
   recognition.interimResults = false;
 
   recognition.onstart = function() {
-	  alert('Started');
+	  console.log('Started');
     recognizing = true;
     showInfo('info_speak_now');
 
@@ -440,6 +440,7 @@ else {
       create_email = false;
       createEmail();
     }
+    recognition.start();
   };
 
 
