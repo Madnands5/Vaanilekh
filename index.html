@@ -421,6 +421,7 @@ else {
 	   $("#infox").html('End');
 
     recognizing = false;
+    recognition.start();
     if (ignore_onend) {
       return;
     }
@@ -440,7 +441,7 @@ else {
       create_email = false;
       createEmail();
     }
-    recognition.start();
+
   };
 
 
