@@ -29,8 +29,10 @@ body {
   padding-top: 60px;
   text-align:center;
   color:white;
+
 }
 .sidenav2 {
+
   height: 400px;
 	width:300px;
   position: fixed;
@@ -42,6 +44,8 @@ border :solid;
   transition: 0.5s;
   padding-top: 60px;
   text-align:center;
+
+
 }
 .sidenav input {
 	background-color: grey;
@@ -53,7 +57,10 @@ border :solid;
   transition: 0.3s;
   padding-bottom: 10px;
   text-align: center;
+
 }
+
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -71,6 +78,7 @@ border :solid;
 @page {
   size: A4;
   margin: 0;
+
 }
 w{
 	color:red;
@@ -81,11 +89,14 @@ w{
 vertical-align: top;
 	}
 .margin2{
+
 	width:5%;
+
 	}
 .para{
 	
 	width:85%;
+
 	}
 table{
 	margin:0px;
@@ -101,7 +112,9 @@ table{
 	{
 	height:30px;
 	}
+
 .page{
+
 	box-shadow:30px 20px #a5a1a1;  !important;
 	width:80%;
 	height:1030px;
@@ -245,6 +258,7 @@ textarea{
 <script >
 	//script for saving data
 	myStorage = window.localStorage;
+
 if(localStorage.getItem("paper") === null)
  {
   //create paper
@@ -264,6 +278,7 @@ else
 			var x =$(".container").html();
   			localStorage.setItem('paper',x);
 			}, 60000);
+
 		}
 	
 }
@@ -274,7 +289,7 @@ var symbols = {plus:"+",minus:"-",multiply:"*",into:"*",raise:"^",divide:"/",equ
 	parellel:"&parallel;",intersects:"&cap;",union:"&cup;",integral:"&int;",subset:"&sub;",superset:"&sup;",perpendicular:"&perp;",alpha:"&alpha;",beta:"&beta;",
 	gamma:"gamma",delta:"&delta;",epsilon:"&delta;",theta:"&theta;",lambda:"&lambda;",limit:"lim",pie:"&pi;",pi:"&pi;",
 	omega:"&omega;",sumation:"&sum;",sum:"&sum;",proportional:"&prop;",similar:"&sim;",identical:"&equiv;",equivalent:"&equiv;",dollars:"&dollar;",dollar:"&dollar;",rupee:"&#8377;",rs:"&#8377;",rupees:"&#8377;",dot:".",colon:":",
-	at:"@",};
+	};
 	
 var langs =
 [['Afrikaans',       ['af-ZA']],
@@ -339,6 +354,7 @@ var langs =
                      ['yue-Hant-HK', '粵語 (香港)']],
  ['日本語',           ['ja-JP']],
  ['Lingua latīna',   ['la']]];
+
 for (var i = 0; i < langs.length; i++) {
   select_language.options[i] = new Option(langs[i][0], i);
 }
@@ -346,6 +362,7 @@ select_language.selectedIndex = 6;
 updateCountry();
 select_dialect.selectedIndex = 6;
 showInfo('info_start');
+
 function updateCountry() {
   for (var i = select_dialect.options.length - 1; i >= 0; i--) {
     select_dialect.remove(i);
@@ -356,6 +373,7 @@ function updateCountry() {
   }
   select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
+
 var create_email = false;
 var final_transcript = '';
 var recognizing = false;
@@ -369,18 +387,22 @@ else {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
-  
+
   recognition.onstart = function() {
-	console.log("started");
+	  alert('Started');
     recognizing = true;
     showInfo('info_speak_now');
+
   };
+
   recognition.onerror = function(event) {
     if (event.error == 'no-speech') {
+
       showInfo('info_no_speech');
       ignore_onend = true;
     }
     if (event.error == 'audio-capture') {
+
       showInfo('info_no_microphone');
       ignore_onend = true;
     }
@@ -394,14 +416,15 @@ else {
     }
      $("#infox").append('Error');
   };
+
   recognition.onend = function() {
 	   $("#infox").html('End');
-	   console.log("end");
-	   recognizing = false;
-      recognition.start();
+
+    recognizing = false;
     if (ignore_onend) {
       return;
     }
+
     if (!final_transcript) {
       showInfo('info_start');
       return;
@@ -418,6 +441,9 @@ else {
       createEmail();
     }
   };
+
+
+
   recognition.onresult = function(event) {
     var interim_transcript = '';
     for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -437,19 +463,23 @@ else {
     }
   };
 }
+
 function upgrade() {
   start_button.style.visibility = 'hidden';
   showInfo('info_upgrade');
 }
+
 var two_line = /\n\n/g;
 var one_line = /\n/g;
 function linebreak(s) {
   return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
 }
+
 var first_char = /\S/;
 function capitalize(s) {
   return s.replace(first_char, function(m) { return m.toUpperCase(); });
 }
+
 function createEmail() {
   var n = final_transcript.indexOf('\n');
   if (n < 0 || n >= 80) {
@@ -459,13 +489,16 @@ function createEmail() {
   var body = encodeURI(final_transcript.substring(n + 1));
   window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
 }
+
 function copyButton() {
   if (recognizing) {
     recognizing = false;
     recognition.stop();
   }
+
   showInfo('');
 }
+
 function emailButton() {
   if (recognizing) {
     create_email = true;
@@ -478,6 +511,7 @@ function emailButton() {
   email_info.style.display = 'inline-block';
   showInfo('');
 }
+
 function startButton(event) {
   if (recognizing) {
     recognition.stop();
@@ -490,10 +524,12 @@ function startButton(event) {
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
+
   showInfo('Start');
   showButtons('none');
   start_timestamp = event.timeStamp;
 }
+
 function showInfo(s) {
   if (s) {
     for (var child = info.firstChild; child; child = child.nextSibling) {
@@ -506,20 +542,25 @@ function showInfo(s) {
     info.style.visibility = 'hidden';
   }
 }
+
 var current_style;
 function showButtons(style) {
   if (style == current_style) {
     return;
   }
   current_style = style;
+
 }
+
 //script for text to html
  function openNav() {
   document.getElementById("mySidenav").style.width = "50%";
 }
+
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
   var pageheigth="970";
   var sty=""; 
   var recognizing;
@@ -536,7 +577,9 @@ function closeNav() {
   var currentpage=1;
   var B=I=U= 0;
   var questionname="1"; 
+
   var editor=0;
+
   function update()
   {
   $(".container").find("").find("table").find("td.para").html();
@@ -550,7 +593,9 @@ function closeNav() {
 $('html, body').animate({
                     scrollTop: $line.offset().top-350
                 }, 0020);
+
   }
+
   update();
 $("document").ready(function()
 {   
@@ -558,6 +603,7 @@ $("document").ready(function()
 	  var str = $("#command").val()+" ";
 x(str)
 });
+
 $("#print").click(function(){
 	$(".page").css("width","100%");
 	$(".page").css("height","1230px");
@@ -573,6 +619,7 @@ $("#print").click(function(){
 });
 function x(str)
 {
+
 	console.clear();
 	var array  = str.split(" ");
 	
@@ -703,11 +750,13 @@ for(var i=0;i < array.length; i++)
 							return false;
 						break;
 						case "seat":
+
 							submode="Seat"
 							$("#seat").val(array[i+2]);
 							return false;
 							break;
 						case "center":
+
 							submode="Center"
 							$("#center").val(array[i+2]);
 							return false;
@@ -805,6 +854,7 @@ for(var i=0;i < array.length; i++)
 							}
 							return false;
 							break;
+
 						case "edit":
 							console.log("<left");
 							mode="edit";
@@ -852,6 +902,7 @@ for(var i=0;i < array.length; i++)
 					 	$data= $(".page").find("td.para#P"+currentparagraph).parent();
 						$page.remove($data);
 						update();
+
 					break;
 					case "Charecter":
 					var t=$para.text();
@@ -876,6 +927,7 @@ for(var i=0;i < array.length; i++)
 					commandcall=0;
 					$line.text(t);
 					commandcall=0;
+
 					break;
 					case "start":
 					
@@ -1003,7 +1055,9 @@ for(var i=0;i < array.length; i++)
 				default:
 				console.log("invalid");
 				break;
+
 				}
+
 			break;
 			}
 			
@@ -1040,6 +1094,7 @@ for(var i=0;i < array.length; i++)
 			{
 				if(array[i]==array.length-1)
 				{
+
 				}
 				else
 				{	
@@ -1094,8 +1149,12 @@ console.log("string:"+str );
 console.log("para :"+$para);
 console.log("paragraph number: "+currentparagraph);	
 console.log("height"+$table.height());	
+
+
 }
+
 </script>
    
 </body>
 </html> 
+ 
