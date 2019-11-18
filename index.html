@@ -141,9 +141,7 @@ textarea{
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+       
       </div>
       <div class="modal-body">
 	<input type="text" style="width:100%;height:50px;" id="replacer">
@@ -252,8 +250,6 @@ textarea{
 
 
 
-
-<button id="button" onclick="toggleStartStop()"></button>
 </center>
 
 <script >
@@ -584,7 +580,7 @@ function closeNav() {
   var submode="name";
   var currentline=0;
   var currentparagraph=1;
-  var currentquestion="";
+  var currentquestion=1;
   var currentsubqueston="";
   var current_element="1";
   var noofpages=1;
@@ -870,27 +866,22 @@ for(var i=0;i < array.length; i++)
 							break;
 
 						case "edit":
-							console.log("<left");
-							mode="edit";
+							
 							$("#exampleModalCenter").show();
-							var line=$line.html();
-							switch(text)
+							$('.modal').modal('show');
+							$line=$("#replacer");
+							submode="edit";
+							
+						break;
+						default:
+							if(submode=="edit")
 							{
-							case "abort":
-							mode="navigate";
-							$("#exampleModalCenter").hide();
-							$line=$("#l"+editor);
+								var replacement=$line.val();
+								replacement=replacement+text+"";
+								$line.val(replcaement);
+								
+							}
 							break;
-							case "alter":
-							$("#exampleModalCenter").hide();
-							var data=$(".replacer").html();
-							$line=$("#l"+editor);
-							$line.html(data);
-							break;
-							default:
-							$line.append(text);
-							break;
-							}	
 						}
 				break;
 				case "delete":
@@ -976,7 +967,7 @@ for(var i=0;i < array.length; i++)
 							update();
 							
 							commandcall=0;
-							mode="";
+							mode="question";
 							submode="";
 									
 			
@@ -984,9 +975,16 @@ for(var i=0;i < array.length; i++)
 						case "question":
 							console.log("Adding Question");
 							currentquestion++;
-							commandcall=0;
-							mode="";
+							currentparagraph++;
+							$table.append("<tr><td class='margin' id='Q"+currentquestion+"'></td><td class='para' id='P"+currentparagraph+"'></td><td class='margin2'></td></tr>") ;
+							$para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);
+							update();
+							$line.html("");
+							$("#Q"+currentquestion).append("Q");
+							commandcall=1;
+							mode="question";
 							submode="";
+							
 						break;
 						case "page":
 							console.log("Adding page");
@@ -1062,10 +1060,25 @@ for(var i=0;i < array.length; i++)
 					}
 				break;
 				case "edit":
-				//-->
+							
 				
 				break;
-				
+				case "question":
+						switch(text)
+					{
+						case"answer":
+							$("#Q"+currentquestion).append("]:");
+					
+							commandcall=0;
+							mode="";
+							submode="";
+							
+						break;
+						default:
+							$("#Q"+currentquestion).append(text+"");
+						break;
+					}
+				break;
 				default:
 				console.log("invalid");
 				break;
