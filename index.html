@@ -34,12 +34,12 @@ body {
 .sidenav2 {
 
   height: 400px;
-	width:300px;
+  width:300px;
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
-border :solid;
+  border :solid;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -87,6 +87,7 @@ w{
 	border-right:solid;
 	width:10%;
 vertical-align: top;
+text-align:center;
 	}
 .margin2{
 
@@ -188,11 +189,11 @@ textarea{
 <div class="right">
   <button id="start_button" onclick="startButton(event)">   Start</button>
   <button id="stop_button" onclick="stopButton(event)">
+
    Stop</button>
 </div>
 <div id="results">
   <span id="final_span" class="final"></span>
-  <span id="interim_span" class="interim"></span>
   <p>
 </div>
 <div id="div_language">
@@ -228,7 +229,7 @@ textarea{
 
 				<tr>
 					<td class="margin" id="Q1">
-						Q1:]
+						Q1A:]
 					</td>
 					
 					<td class="para" id="P1">
@@ -452,15 +453,13 @@ else {
 
 
   recognition.onresult = function(event) {
-    var interim_transcript = '';
+
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
 		  
         final_transcript += event.results[i][0].transcript;
       
-      } else {
-        interim_transcript += event.results[i][0].transcript;
-      }
+      } 
     }
     final_transcript = capitalize(final_transcript);
 	x(final_transcript)
@@ -530,7 +529,6 @@ function startButton(event) {
   flag=1;
   ignore_onend = false;
   final_span.innerHTML = '';
-  interim_span.innerHTML = '';
 
   showInfo('Start');
   showButtons('none');
@@ -619,11 +617,13 @@ $("#print").click(function(){
 	$(".page").css("height","1230px");
 	$("button").css("display","none");
 	$(".sidenav2").css("display","none");
+
 	window.print();
 	$(".page").css("width","80%");
 	$(".page").css("height","1030px");
 	$("button").css("display","block");
 	$(".sidenav2").css("display","block");
+	
 	});
 	
 });
@@ -1047,11 +1047,17 @@ for(var i=0;i < array.length; i++)
 					
 						break;
 						case "print":
-							$(".page").css("width","100%");
-							$("button").css("display","none");
-							window.print();
-							$(".page").css("width","60%");
-							$("button").css("display","none");
+								$(".page").css("width","100%");
+								$(".page").css("height","1230px");
+								$("button").css("display","none");
+								$(".sidenav2").css("display","none");
+
+								window.print();
+								$(".page").css("width","80%");
+								$(".page").css("height","1030px");
+								$("button").css("display","block");
+								$(".sidenav2").css("display","block");
+	
 							window.localStorage.removeItem('paper');
 							break;
 							commandcall=0;
