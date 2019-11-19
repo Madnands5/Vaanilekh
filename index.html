@@ -466,8 +466,9 @@ recognition.continuous=$("#c").val();
     }
     final_transcript = capitalize(final_transcript);
 	x(final_transcript)
-    interim_span.innerHTML = linebreak(interim_transcript);
-    if (final_transcript || interim_transcript) {
+	final_transcript="";
+ 
+    if (final_transcript) {
       showButtons('inline-block');
     }
   };
@@ -1130,8 +1131,10 @@ for(var i=0;i < array.length; i++)
 		
 		switch(text)
 		{	
-			case "vl":
-			case "VL":
+			case "vaani":
+			case "vani":
+			case "bani":
+			case "baani":
 			commandcall=1;
 			console.log("command activated");
 			break;
