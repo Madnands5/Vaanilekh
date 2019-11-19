@@ -188,9 +188,12 @@ textarea{
 <p id="infox">asdsa das</p>
 <div class="right">
   <button id="start_button" onclick="startButton(event)">   Start</button>
-  <button id="stop_button" onclick="stopButton(event)">
-
-   Stop</button>
+  <button id="stop_button" onclick="stopButton(event)"> Stop</button>
+  	<br>
+	<select id="c" >
+		<option value="true">True</option>
+		<option value="false">False</option>
+	</select>
 </div>
 <div id="results">
   <span id="final_span" class="final"></span>
@@ -383,7 +386,7 @@ if (!('webkitSpeechRecognition' in window)) {
 else {
   $("#infox").append('Started');
   var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
+recognition.continuous=$("#c").val();
   recognition.interimResults = false;
 
   recognition.onstart = function() {
@@ -626,6 +629,16 @@ $("#print").click(function(){
 	
 	});
 	
+	$("#c").change(function(){
+	  if(recognition.continuous==true)
+	  {
+		recognition.continuous=false;
+	  }
+	  else{
+		recognition.continuous=true;
+	  }
+	   console.log(recognition.continuous);
+	});
 });
 function x(str)
 {
