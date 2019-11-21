@@ -473,7 +473,6 @@ recognition.continuous=$("#c").val();
     }
   };
 }
-
 function upgrade() {
   start_button.style.visibility = 'hidden';
   showInfo('info_upgrade');
@@ -609,6 +608,19 @@ $('html, body').animate({
   }
 
   update();
+function deduct()
+{	
+  $(".container").find("").find("table").find("td.para").html();
+  $container=$(".container");//ad page here
+  $page=$(".container").find(".page#"+currentpage); //add questions 
+  $table=$(".container").find(".page#"+currentpage).find("table."+currentpage);//add para here
+  console.log($table.html());
+  $para=$(".container").find(".page#"+currentpage).find("table."+currentpage).find("td.para#P"+currentparagraph);//add lines here 
+  $line=$para.find("l#"+currentline);
+$('html, body').animate({
+                    scrollTop: $line.offset().top-350
+                }, 0020);
+}
 $("document").ready(function()
 {   
   $("#submit").click(function(){
@@ -641,6 +653,9 @@ $("#print").click(function(){
 	   console.log(recognition.continuous);
 	});
 });
+
+
+
 function x(str)
 {
 
@@ -677,9 +692,16 @@ for(var i=0;i < array.length; i++)
 			$line.css("background-color","YELLOW");
 			break;
 			case "exit":
+			if(submode=="line" && mode=="delete")
+			{
+			update();
+			mode="";
+			submode="";
+			}
 			commandcall=0;
 			mode="";
 			submode="";
+			
 			$line.removeAttr("style");
 			break;
 			case "delete":
@@ -902,59 +924,71 @@ for(var i=0;i < array.length; i++)
 					switch(text)
 					{
 					case "line":
-					var lio=[];
-					lastIndex=0;
-					var t=$line.html();
-					 lio[0] = t.lastIndexOf("?");
-					 lio[1] = t.lastIndexOf(".");
-					 lio[2] = t.lastIndexOf("\n");
-					 lio[3] = t.lastIndexOf("\t");
-				
-					lastIndex=Math.max.apply(Math,lio); 
-					console.log(lastIndex);
-					t = t.substring(0, lastIndex);
-					$para.html(t);
-					commandcall=0;
+					submode="line"
+				//check if is in current para 
+					if($line.html().length>4)
+					{
+					$line.remove();
+					currentline--;
+					deduct();
+					$line.remove();
+					}
+					else
+					{
+					$line.remove();
+					currentline--;
+	
+					update();
+					$line.remove();
+					}
 					break;
+					
 					case"paragraph":
 					case"para":
 					 	$data= $(".page").find("td.para#P"+currentparagraph).parent();
 						$page.remove($data);
-						update();
+		
 
 					break;
 					case "Charecter":
-					var t=$para.text();
+					var t=$line.html();
 					
 					len=(t.length-1);
 					
 					t=t.slice(0,len-2);
 					
-					console.log(t);
-					$para.text(t);
+		
+					$line.text(t);
 					commandcall=0;
 					break;
+					
 					case "word":
+					if($line.html().length>4)
+					{
+						
 					var t=$.trim($line.text());
 					
 					
 					var lastIndex = t.lastIndexOf(" ");
 					t = t.substring(0, lastIndex);
-					
-					console.log(t);
-					$para.text(t);
-					commandcall=0;
 					$line.text(t);
-					commandcall=0;
+					}
+					else{
+					$line.remove();
+					currentline--;
+					deduct();
+					var t=$.trim($line.text());
+					
+					
+					var lastIndex = t.lastIndexOf(" ");
+					t = t.substring(0, lastIndex);
+					$line.text(t);
+					}
+
 
 					break;
-					case "start":
-					
-					break;
-					case "stop":
-					
-					break;
 					default:
+					
 					break;
 					}
 				break;
@@ -1021,7 +1055,7 @@ for(var i=0;i < array.length; i++)
 						break;
 					}
 				break;
-				case "style":
+				/*case "style":
 					switch(text)
 					{
 						case"bold":
@@ -1053,7 +1087,7 @@ for(var i=0;i < array.length; i++)
 						default: 
 						break;
 					}
-				break;
+				break;*/
 				case "document":
 					switch(text)
 					{
