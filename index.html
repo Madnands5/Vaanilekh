@@ -205,28 +205,29 @@ textarea{
     <select id="select_dialect"></select>
   </div>
 </div>	
-	<div id="mySidenav" class="sidenav">
-			<center>
-			Name:<br>
-			<input type="text" id="name">
-			Roll no:<br>
-			<input type="text" id="roll">		
-			Center no:<br>
-			<input type="text" id="center">
-			Seat no:<br>
-			<input type="text" id="seat">
-			University:<br>
-			<input type="text" id="university">
-			School:<br>
-			<input type="text" id="school">
-			State:<br>
-			<input type="text" id="state">
-			City:<br>
-			<input type="text" id="city">
-			</center>
-	</div>
+
 <center>
 <div class="container" style="height:auto">
+		<div id="" class="page" style="padding-top:80px">
+		<table>
+			<tr><td></td><td>Name:</td><td></td><td>
+			<input type="text" id="name" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>Roll no:</td><td></td><td>
+			<input type="text" id="roll" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>Center no:</td><td></td><td>
+			<input type="text" id="center" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>Seat no:</td><td></td><td>
+			<input type="text" id="seat" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>University:</td><td></td><td>
+			<input type="text" id="university" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>School:</td><td></td><td>
+			<input type="text" id="school" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>State:</td></td><td><td>
+			<input type="text" id="state" style="width:80%;border:none;margin-left:10px;"></td></tr>
+			<tr><td></td><td>City:</td><td></td><td>
+			<input type="text" id="city" style="width:80%;border:none;margin-left:10px;"></td></tr>
+		</table>
+		</div>
 		<div class="page" id="1" >
 			<table class="1">
 
@@ -564,13 +565,8 @@ function showButtons(style) {
 }
 
 //script for text to html
- function openNav() {
-  document.getElementById("mySidenav").style.width = "50%";
-}
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
+
 
   var pageheigth="970";
   var sty=""; 
@@ -682,7 +678,7 @@ for(var i=0;i < array.length; i++)
 			submode="";
 			break;
 			case "profile":
-			openNav();
+			
 			mode="profile";
 			break;				
 			case "navigate":
