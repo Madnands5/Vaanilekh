@@ -149,7 +149,7 @@ textarea{
       </div>
       <div class="modal-footer">
 		<button type="button" class="btn btn-primary " data-dismiss="modal">Clear</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Abort</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
         <button type="button" class="btn btn-success">Alter</button>
       </div>
     </div>
@@ -902,17 +902,10 @@ for(var i=0;i < array.length; i++)
 							$("#exampleModalCenter").show();
 							$('.modal').modal('show');
 							$line=$("#replacer");
-							submode="edit";
+							mode="edit";
 							
 						break;
 						default:
-							if(submode=="edit")
-							{
-								var replacement=$line.val();
-								replacement=replacement+text+"";
-								$line.val(replcaement);
-								
-							}
 							break;
 						}
 				break;
@@ -1110,7 +1103,28 @@ for(var i=0;i < array.length; i++)
 					}
 				break;
 				case "edit":
-							
+					switch(text)
+					{
+					case "clear":
+						$("#replacer").val("");
+					break;
+					case"exit":
+						$("#replacer").val();
+						$line=$("l#"+editor);
+						mode="navigate";
+						submode="";
+					break;
+					case"alter":
+					
+					break;
+					default:
+						var ptext;
+						ptext=$("#replacer").val();
+						$("#replacer").val(ptext+" "+text);
+						return false;
+						
+					break;
+					}		
 				
 				break;
 				case "question":
